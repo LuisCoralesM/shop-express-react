@@ -6,20 +6,20 @@ export const users = [
     last_name: "Corales",
     email: "1@email.com",
     password: "123",
-    role: ROLE.ADMIN.toString(),
+    role: ROLE.ADMIN,
   },
   {
     first_name: "B",
     last_name: "Ramirez",
     email: "2@email.com",
     password: "456",
-    role: ROLE.MOD.toString(),
+    role: ROLE.MOD,
   },
   {
     first_name: "C",
     last_name: "gonzalez",
     email: "3@email.com",
     password: "789",
-    role: ROLE.USER.toString(),
+    role: ROLE.USER,
   },
 ];

@@ -5,11 +5,7 @@ import { Request, Response } from "express";
 
 const prisma = new PrismaClient();
 
-function generateToken(
-  payload: User,
-  privateKey: string,
-  signOptions?: SignOptions
-) {
+function generateToken(payload: User, privateKey: string, signOptions?: SignOptions) {
   return jwt.sign(payload, privateKey, signOptions);
 }
 
@@ -22,15 +18,16 @@ export async function login(req: Request, res: Response) {
       req.headers.authorization = generateToken(req.body.user, "secret");
     else throw new Error();
 
-    // res.cookie("token", req.headers.authorization, {
-    //     httpOnly: true,
-    //     secure: true
-    // });
-
-    return res.status(201).json({
-      username: req.body.user.username,
-      token: req.headers.authorization,
-    });
+    return res
+      .cookie("token", req.headers.authorization, {
+        httpOnly: true,
+        secure: true,
+      })
+      .status(201)
+      .json({
+        username: req.body.user.username,
+        token: req.headers.authorization,
+      });
   } catch (e) {
     console.log(e);
     return res.sendStatus(401);
@@ -42,9 +39,7 @@ export async function signup(req: Request, res: Response) {
   try {
     if (req.headers.userExist) throw new Error();
 
-    const hash = await argon2.hash(req.body.password, {
-      type: argon2.argon2id,
-    });
+    const hash = await argon2.hash(req.body.password, {type: argon2.argon2id});
 
     const user = await prisma.user.create({
       data: {
