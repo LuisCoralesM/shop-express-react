@@ -2,10 +2,15 @@ import argon2 from "argon2";
 import { PrismaClient, User } from "@prisma/client";
 import jwt, { SignOptions } from "jsonwebtoken";
 import { Request, Response } from "express";
+import { ROLE } from "../roles/roles";
 
 const prisma = new PrismaClient();
 
-function generateToken(payload: User, privateKey: string, signOptions?: SignOptions) {
+function generateToken(
+  payload: User,
+  privateKey: string,
+  signOptions?: SignOptions
+) {
   return jwt.sign(payload, privateKey, signOptions);
 }
 
@@ -25,7 +30,7 @@ export async function login(req: Request, res: Response) {
       })
       .status(201)
       .json({
-        username: req.body.user.username,
+        email: req.body.user.email,
         token: req.headers.authorization,
       });
   } catch (e) {
@@ -39,7 +44,9 @@ export async function signup(req: Request, res: Response) {
   try {
     if (req.headers.userExist) throw new Error();
 
-    const hash = await argon2.hash(req.body.password, {type: argon2.argon2id});
+    const hash = await argon2.hash(req.body.password, {
+      type: argon2.argon2id,
+    });
 
     const user = await prisma.user.create({
       data: {
@@ -47,7 +54,7 @@ export async function signup(req: Request, res: Response) {
         last_name: req.body.last_name,
         email: req.body.email,
         password: hash,
-        role: req.body.role,
+        role: ROLE.USER,
       },
     });
 

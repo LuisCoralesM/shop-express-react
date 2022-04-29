@@ -7,3 +7,7 @@ body {
   color: white;
   background-color: #202124;
 }
+
+section {
+  padding: 15px;
+}

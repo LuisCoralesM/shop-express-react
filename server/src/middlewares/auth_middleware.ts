@@ -5,7 +5,11 @@ import jwt from "jsonwebtoken";
 const prisma = new PrismaClient();
 
 /** Verify if the user already exists */
-export async function verifyIfUserExists(req: Request, res: Response, next: NextFunction) {
+export async function verifyIfUserExists(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   try {
     const user = await prisma.user.findUnique({
       where: {
