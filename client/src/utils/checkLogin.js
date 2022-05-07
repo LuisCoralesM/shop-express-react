@@ -1,3 +1,3 @@
-export const checkLogin = (key = "token") => {
-    return localStorage.getItem(key) ? true : false;
-}
+export const checkLogin = (key = "isLogged") => {
+  return localStorage.getItem(key) ? true : false;
+};

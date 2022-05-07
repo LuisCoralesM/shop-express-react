@@ -25,9 +25,11 @@ export default function DeleteUser({ props }) {
 
   async function deleteUser(e) {
     e.preventDefault();
-    const response = await fetchApi("/dashboard/users/", "DELETE");
+    const delResponse = await fetchApi("/dashboard/users/", "DELETE");
+    if (!delResponse.ok) return console.log(delResponse.data.status);
 
-    if (!response.ok) return console.log(response.data.status);
+    const logResponse = await fetchApi("/auth/logout", "POST");
+    if (!logResponse.ok) return console.log(logResponse.data.status);
 
     setDeleted(true);
     localStorage.clear();

@@ -24,7 +24,7 @@ export default function Login({ props }) {
 
     if (!response.ok) return console.log(response.data.status);
 
-    localStorage.setItem("token", JSON.stringify(response.data.token));
+    localStorage.setItem("isLogged", JSON.stringify(response.data.isLogged));
 
     setHasLogged(true);
     props.setIsLogged(true);

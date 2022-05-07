@@ -33,12 +33,11 @@ export async function verifyIfUserExists(
 
 export function verifyToken(req: Request, res: Response, next: NextFunction) {
   try {
-    const authHeader = req.headers.authorization;
-    const token = authHeader && authHeader.split(" ")[1];
+    const token = req.cookies.token && req.cookies.token;
 
     if (token === undefined) throw new Error();
 
-    jwt.verify(token, "secret", (err, user) => {
+    jwt.verify(token, "secret", (err: any, user: any) => {
       if (err) throw err;
       req.body.user = user;
     });

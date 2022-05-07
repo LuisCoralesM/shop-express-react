@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import cors from "cors";
 import router from "./routes";
+import cookieParser from "cookie-parser";
 
 const prisma = new PrismaClient();
 
@@ -11,6 +12,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 
 app.get("/status", async (req: Request, res: Response) => {
   try {

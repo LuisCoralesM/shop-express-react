@@ -1,25 +1,25 @@
-import { ROLE } from "../src/roles/roles";
+import { Role } from "@prisma/client";
 
 export const users = [
   {
     first_name: "A",
     last_name: "Corales",
     email: "1@email.com",
-    password: "123",
-    role: ROLE.ADMIN,
+    password: "11111111",
+    role: Role.ADMIN,
   },
   {
     first_name: "B",
     last_name: "Ramirez",
     email: "2@email.com",
-    password: "456",
-    role: ROLE.MOD,
+    password: "33333333",
+    role: Role.USER,
   },
   {
     first_name: "C",
     last_name: "gonzalez",
     email: "3@email.com",
-    password: "789",
-    role: ROLE.USER,
+    password: "33333333",
+    role: Role.USER,
   },
 ];

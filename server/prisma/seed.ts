@@ -1,14 +1,47 @@
 import { PrismaClient } from "@prisma/client";
-import { users } from "./data";
+import argon2 from "argon2";
+
+async function hashPasswords(): Promise<string[]> {
+  return [
+    await argon2.hash("11111111", {
+      type: argon2.argon2id,
+    }),
+    await argon2.hash("22222222", {
+      type: argon2.argon2id,
+    }),
+    await argon2.hash("33333333", {
+      type: argon2.argon2id,
+    }),
+  ];
+}
 
 const prisma = new PrismaClient();
 
 async function main() {
-  for (let user of users) {
-    await prisma.user.create({
-      data: user,
-    });
-  }
+  const pass = await hashPasswords();
+
+  await prisma.user.createMany({
+    data: [
+      {
+        first_name: "A",
+        last_name: "Corales",
+        email: "1@1.com",
+        password: pass[0],
+      },
+      {
+        first_name: "B",
+        last_name: "Ramirez",
+        email: "2q2.com",
+        password: pass[1],
+      },
+      {
+        first_name: "E",
+        last_name: "gonzalez",
+        email: "3@3.com",
+        password: pass[2],
+      },
+    ],
+  });
 }
 
 main()

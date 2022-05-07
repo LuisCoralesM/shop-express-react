@@ -15,6 +15,8 @@ export default function Logout({ props }) {
 
     const response = await fetchApi("/auth/logout", "POST");
 
+    console.log(response.data);
+
     if (!response.ok) return console.log(response.data.status);
 
     localStorage.clear();

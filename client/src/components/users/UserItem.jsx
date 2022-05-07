@@ -1,13 +1,9 @@
 import React from "react";
 
 export default function UserItem({ user }) {
-  return user === undefined ? (
-    <li className="list-none">User not found</li>
-  ) : (
+  return user !== undefined ? (
     <li className="list-none">
-      {user.username +
-        " - " +
-        user.first_name +
+      {user.first_name +
         " - " +
         user.last_name +
         " - " +
@@ -15,5 +11,7 @@ export default function UserItem({ user }) {
         " - " +
         (user.deleted_at != null ? "deleted" : "active")}
     </li>
+  ) : (
+    <li className="list-none">User not found</li>
   );
 }

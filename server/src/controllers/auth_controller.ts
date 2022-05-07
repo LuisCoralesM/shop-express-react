@@ -1,8 +1,7 @@
 import argon2 from "argon2";
-import { PrismaClient, User } from "@prisma/client";
+import { PrismaClient, User, Role } from "@prisma/client";
 import jwt, { SignOptions } from "jsonwebtoken";
 import { Request, Response } from "express";
-import { ROLE } from "../roles/roles";
 
 const prisma = new PrismaClient();
 
@@ -31,7 +30,7 @@ export async function login(req: Request, res: Response) {
       .status(201)
       .json({
         email: req.body.user.email,
-        token: req.headers.authorization,
+        isLogged: true,
       });
   } catch (e) {
     console.log(e);
@@ -54,7 +53,7 @@ export async function signup(req: Request, res: Response) {
         last_name: req.body.last_name,
         email: req.body.email,
         password: hash,
-        role: ROLE.USER,
+        role: Role.USER,
       },
     });
 
@@ -70,7 +69,10 @@ export async function signup(req: Request, res: Response) {
 /** To POST auth route */
 export async function logout(req: Request, res: Response) {
   try {
-    return res.clearCookie("token").status(201).json({ msg: "Logged out" });
+    return res
+      .clearCookie("token")
+      .status(201)
+      .json({ msg: "Logged out", isLogged: false });
   } catch (e) {
     console.log(e);
     return res.sendStatus(401);
