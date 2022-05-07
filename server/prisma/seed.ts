@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Role } from "@prisma/client";
 import argon2 from "argon2";
 
 async function hashPasswords(): Promise<string[]> {
@@ -27,6 +27,7 @@ async function main() {
         last_name: "Corales",
         email: "1@1.com",
         password: pass[0],
+        role: Role.ADMIN,
       },
       {
         first_name: "B",

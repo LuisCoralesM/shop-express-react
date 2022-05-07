@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { fetchApi } from "../../utils/response";
 
 export default function Logout({ props }) {
   const [hasLoggedOut, setHasLoggedOut] = useState(false);
   const [isLogged, setIsLogged] = useState(true);
+
+  let navigate = useNavigate();
 
   useEffect(() => {
     setIsLogged(props.isLogged);
@@ -22,6 +24,8 @@ export default function Logout({ props }) {
     localStorage.clear();
     setHasLoggedOut(true);
     props.setIsLogged(false);
+
+    navigate("/");
   }
 
   return (

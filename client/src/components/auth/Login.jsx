@@ -9,6 +9,7 @@ export default function Login({ props }) {
     password: undefined,
   });
   const [hasLogged, setHasLogged] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     setHasLogged(checkLogin());
@@ -25,8 +26,13 @@ export default function Login({ props }) {
     if (!response.ok) return console.log(response.data.status);
 
     localStorage.setItem("isLogged", JSON.stringify(response.data.isLogged));
+    localStorage.setItem(
+      "isAdmin",
+      JSON.stringify(response.data.isAdmin === "ADMIN" ? true : false)
+    );
 
     setHasLogged(true);
+    setIsAdmin(true);
     props.setIsLogged(true);
   }
 

@@ -12,11 +12,11 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Nav({ props }) {
+export default function AdminNav({ props }) {
   const navItems = [
+    { name: "Admin", href: "/admin/", current: false },
+    { name: "Products", href: "/admin/products", current: false },
     { name: "Shop", href: "/", current: true },
-    // { name: "Admin", href: "/admin/", current: false },
-    // { name: "Products", href: "/dashboard/products", current: false },
   ];
 
   const location = useLocation();
@@ -99,19 +99,6 @@ export default function Nav({ props }) {
                     leaveTo="transform opacity-0 scale-95"
                   >
                     <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            to="/dashboard/users/myuser"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            My account
-                          </Link>
-                        )}
-                      </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
                           <Link

@@ -31,6 +31,7 @@ export async function login(req: Request, res: Response) {
       .json({
         email: req.body.user.email,
         isLogged: true,
+        isAdmin: req.body.user.role,
       });
   } catch (e) {
     console.log(e);
