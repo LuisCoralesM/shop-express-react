@@ -31,7 +31,7 @@ async function main() {
       {
         first_name: "B",
         last_name: "Ramirez",
-        email: "2q2.com",
+        email: "2@2.com",
         password: pass[1],
       },
       {
