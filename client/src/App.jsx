@@ -25,6 +25,7 @@ import Error from "./views/Error";
 
 import Admin from "./views/Admin";
 import AdminNav from "./components/nav/AdminNav";
+import AdminAuth from "./components/auth/AdminAuth";
 
 export default function App() {
   const [status, setStatus] = useState(false);
@@ -54,6 +55,8 @@ export default function App() {
   useEffect(() => {
     setIsAdmin(checkLogin("isAdmin"));
   }, []);
+
+  console.log(isAdmin);
 
   if (isLoading) return <p>Loading..</p>;
 
@@ -110,6 +113,11 @@ export default function App() {
             <Route
               path="/auth/login"
               element={<Login props={{ isLogged, setIsLogged }} />}
+            />
+
+            <Route
+              path="/admin/login"
+              element={<AdminAuth props={setIsAdmin} />}
             />
 
             {isLogged ? (
