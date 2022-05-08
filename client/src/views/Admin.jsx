@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Title from "../components/menu/Title";
 import { checkLogin } from "../utils/checkLogin";
 import { fetchApi } from "../utils/response";
 
@@ -28,5 +29,11 @@ export default function Admin() {
 
   if (isLoading) return <p>Loading..</p>;
 
-  return status ? "THIS IS ADMIN" : <p className="font-bold">API Down</p>;
+  return status ? (
+    <section>
+      <Title props={{ title: "This is admin" }} />
+    </section>
+  ) : (
+    <p className="font-bold">API Down</p>
+  );
 }

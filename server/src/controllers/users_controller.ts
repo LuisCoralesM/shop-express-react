@@ -40,7 +40,7 @@ export async function getOneUser(req: Request, res: Response) {
   try {
     const user = await prisma.user.findUnique({
       where: {
-        id: Number(req.params.id),
+        email: req.params.email,
       },
     });
 
@@ -62,6 +62,26 @@ export async function deleteOneUser(req: Request, res: Response) {
       },
       data: {
         deleted_at: new Date(),
+      },
+    });
+
+    return res.status(200).json({
+      data: user,
+    });
+  } catch (e) {
+    console.log(e);
+    return res.sendStatus(500);
+  }
+}
+
+export async function updateUser(req: Request, res: Response) {
+  try {
+    const user = await prisma.user.update({
+      where: {
+        id: Number(req.params.id),
+      },
+      data: {
+        role: req.body.role,
       },
     });
 

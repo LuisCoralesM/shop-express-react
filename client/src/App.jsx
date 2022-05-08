@@ -17,13 +17,13 @@ import Login from "./components/auth/Login";
 
 import Users from "./views/Users";
 import MyUser from "./components/users/MyUser";
-import DeleteUser from "./components/users/DeleteUser";
-import ListUsers from "./components/users/ListUser";
 import SearchUser from "./components/users/SearchUser";
+import DeleteOwnUser from "./components/users/DeleteOwnUser";
 
 import Error from "./views/Error";
 
 import Admin from "./views/Admin";
+import ActionMenu from "./components/users/ActionMenu";
 
 export default function App() {
   const [status, setStatus] = useState(false);
@@ -83,12 +83,6 @@ export default function App() {
                 />
               }
             />
-
-            <Route path="/dashboard/users/" element={<Users />} />
-            <Route path="/dashboard/users/myuser" element={<MyUser />} />
-            <Route path="/dashboard/users/list" element={<ListUsers />} />
-            <Route path="/dashboard/users/search" element={<SearchUser />} />
-            <Route path="/dashboard/users/edit" element={<DeleteUser />} />
           </>
         ) : (
           <Route path="*" element={<Navigate to="/auth/login" replace />} />
@@ -97,6 +91,12 @@ export default function App() {
         {isAdmin ? (
           <>
             <Route path="/admin" element={<Admin />} />
+
+            <Route path="/admin/users/" element={<Users />} />
+            <Route path="/admin/users/myuser" element={<MyUser />} />
+            <Route path="/admin/users/search" element={<SearchUser />} />
+            <Route path="/admin/users/edit" element={<DeleteOwnUser />} />
+            <Route path="/admin/users/actions" element={<ActionMenu />} />
           </>
         ) : (
           <Route path="*" element={<Error />} />
