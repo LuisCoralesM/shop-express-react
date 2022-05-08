@@ -15,10 +15,6 @@ export default function DeleteUser({ user }) {
     setDeleted(true);
   }
 
-  useEffect(() => {
-    console.log(user);
-  }, []);
-
   return (
     <>
       {!isDeleted ? (

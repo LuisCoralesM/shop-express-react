@@ -9,13 +9,9 @@ export default function EditUser({ user }) {
   async function updateUser(e) {
     e.preventDefault();
 
-    console.log(newRole);
-
     const response = await fetchApi("/dashboard/users/" + user.id, "PUT", {
       role: newRole,
     });
-
-    console.log(response.data);
 
     if (!response.ok) return console.log(response.data.status);
 
