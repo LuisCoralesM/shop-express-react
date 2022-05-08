@@ -18,6 +18,10 @@ app.use(cookieParser());
 // Serve static files from the React frontend app
 app.use(express.static(join(__dirname, "../../client/build")));
 
+app.get("/health", async (req: Request, res: Response) => {
+  return res.send("ok");
+});
+
 app.get("/status", async (req: Request, res: Response) => {
   try {
     const count = await prisma.user.count();
