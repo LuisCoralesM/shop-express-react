@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client";
 import cors from "cors";
 import router from "./routes";
 import cookieParser from "cookie-parser";
+import { join } from "path";
 
 const prisma = new PrismaClient();
 
@@ -14,6 +15,9 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
+// Serve static files from the React frontend app
+app.use(express.static(join(__dirname, "../../client/build")));
+
 app.get("/status", async (req: Request, res: Response) => {
   try {
     const count = await prisma.user.count();
@@ -24,6 +28,11 @@ app.get("/status", async (req: Request, res: Response) => {
 });
 
 app.use("/", router);
+
+// AFTER defining routes: Anything that doesn't match what's above, send back index.html; (the beginning slash ('/') in the string is important!)
+app.get("*", (req, res) => {
+  res.sendFile(join(__dirname + "../../client/build/index.html"));
+});
 
 app.use((req: Request, res: Response) => {
   return res.sendStatus(404);
