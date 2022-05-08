@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { fetchApi } from "../../utils/response";
 import Title from "../menu/Title";
 
-export default function EditUser({ post: user }) {
+export default function EditUser({ user }) {
   const [isUpdated, setIsUpdated] = useState(false);
   const [newRole, setNewRole] = useState();
 
@@ -27,10 +27,7 @@ export default function EditUser({ post: user }) {
           <select
             className="w-full bg-gray-700 border-transparent rounded"
             defaultValue={user ? user.role : ""}
-            onChange={(e) => {
-              setNewRole(e.target.value);
-              console.log(e.target.value);
-            }}
+            onChange={(e) => setNewRole(e.target.value)}
           >
             <option value="USER">USER</option>
             <option value="ADMIN">ADMIN</option>

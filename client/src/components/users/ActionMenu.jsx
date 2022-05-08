@@ -17,7 +17,6 @@ export default function ActionMenu({ props }) {
 
       if (!response.ok) return console.log(response.status);
 
-      console.log(response.data.data);
       setUsers(response.data.data);
     }
     fetchUser();
