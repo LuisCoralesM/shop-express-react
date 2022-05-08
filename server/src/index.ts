@@ -31,13 +31,6 @@ app.get("/status", async (req: Request, res: Response) => {
   }
 });
 
-app.get("/us", async (req: Request, res: Response) => {
-  try {
-    const users = await prisma.user.findMany();
-    return res.json(users);
-  } catch (error) {}
-});
-
 app.use("/", router);
 
 // AFTER defining routes: Anything that doesn't match what's above, send back index.html; (the beginning slash ('/') in the string is important!)
