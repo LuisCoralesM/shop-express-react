@@ -32,7 +32,8 @@ export default function Login({ props }) {
     );
 
     setHasLogged(true);
-    setIsAdmin(true);
+    setIsAdmin(response.data.isAdmin === "ADMIN" ? true : false);
+    props.setIsAdmin(response.data.isAdmin === "ADMIN" ? true : false);
     props.setIsLogged(true);
   }
 

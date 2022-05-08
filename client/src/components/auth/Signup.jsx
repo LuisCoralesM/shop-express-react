@@ -33,8 +33,6 @@ export default function Signup({ props }) {
         password: user.password,
       });
 
-      console.log(response.data);
-
       if (!response.ok) return console.log(response.data.status);
 
       setHasRegistered(true);

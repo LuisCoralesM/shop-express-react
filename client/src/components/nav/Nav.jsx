@@ -13,11 +13,13 @@ function classNames(...classes) {
 }
 
 export default function Nav({ props }) {
-  const navItems = [
-    { name: "Shop", href: "/", current: true },
-    // { name: "Admin", href: "/admin/", current: false },
-    // { name: "Products", href: "/dashboard/products", current: false },
-  ];
+  const navItems = props.isAdmin
+    ? [
+        { name: "Admin", href: "/admin/", current: false },
+        { name: "Products", href: "/admin/products", current: false },
+        { name: "Shop", href: "/", current: true },
+      ]
+    : [{ name: "Shop", href: "/", current: true }];
 
   const location = useLocation();
 
