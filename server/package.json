@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "start": "ts-node src/index.ts",
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "eslint": "eslint './**/*.{ts}'"
   },
   "repository": {
     "type": "git",
