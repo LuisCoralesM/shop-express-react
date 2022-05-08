@@ -7,7 +7,7 @@
     "test": "jest",
     "start": "ts-node src/index.ts",
     "dev": "nodemon src/index.ts",
-    "mig": "prisma migrate dev",
+    "mig": "prisma migrate deploy",
     "eslint": "eslint './**/*.{ts}'"
   },
   "repository": {
