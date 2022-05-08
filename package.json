@@ -2,7 +2,7 @@
   "scripts": {
     "start": "npm run dev",
     "frontend": "cd ../client && npm install && npm start",
-    "api": "cd server && npm install && npm start",
+    "api": "cd server && npm install && npm run mig && npm start",
     "dev": "npm run api && npm run frontend",
     "heroku-postbuild": "cd client && npm install && npm run build"
   }
