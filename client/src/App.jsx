@@ -99,7 +99,7 @@ export default function App() {
             <Route path="/admin" element={<Admin />} />
           </>
         ) : (
-          ""
+          <Route path="*" element={<Error />} />
         )}
 
         <Route path="*" element={<Error />} />
