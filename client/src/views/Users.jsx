@@ -4,10 +4,10 @@ import Title from "../components/menu/Title";
 
 export default function Users({ props }) {
   const items = [
-    { link: "/dashboard/users/myuser", text: "My user" },
-    { link: "/dashboard/users/list", text: "List users" },
-    { link: "/dashboard/users/search", text: "Search user by id" },
-    { link: "/dashboard/users/edit", text: "Delete user" },
+    { link: "/admin/users/myuser", text: "My user" },
+    { link: "/admin/users/search", text: "Search user by id" },
+    { link: "/admin/users/edit", text: "Delete own user" },
+    { link: "/admin/users/actions", text: "Actions menu" },
   ];
   return (
     <section>

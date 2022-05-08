@@ -3,11 +3,11 @@ import React from "react";
 export default function UserItem({ user }) {
   return user !== undefined ? (
     <li className="list-none">
-      {user.first_name +
+      {user.email +
         " - " +
-        user.last_name +
+        user.role +
         " - " +
-        user.email +
+        user.created_at +
         " - " +
         (user.deleted_at != null ? "deleted" : "active")}
     </li>
