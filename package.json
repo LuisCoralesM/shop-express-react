@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "npm dev",
+    "start": "npm run dev",
     "frontend": "cd client && npm start",
     "api": "cd server && npm run dev",
     "dev": "concurrently --kill-others-on-fail \"npm run api\" \"npm run frontend\"",
