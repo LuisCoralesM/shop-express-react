@@ -25,6 +25,7 @@ export default function Logout({ props }) {
     setHasLoggedOut(true);
     props.setIsLogged(false);
 
+    props.setIsAdmin(false);
     navigate("/");
   }
 

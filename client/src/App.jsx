@@ -77,7 +77,11 @@ export default function App() {
           <>
             <Route
               path="/auth/logout"
-              element={<Logout props={{ isLogged, setIsLogged }} />}
+              element={
+                <Logout
+                  props={{ isLogged, setIsLogged, isAdmin, setIsAdmin }}
+                />
+              }
             />
 
             <Route path="/dashboard/users/" element={<Users />} />
