@@ -25,7 +25,6 @@ export async function login(req: Request, res: Response) {
     return res
       .cookie("token", req.headers.authorization, {
         httpOnly: true,
-        secure: true,
       })
       .status(201)
       .json({
