@@ -31,7 +31,7 @@ export default function DeleteUser({ user }) {
           </form>
         </>
       ) : (
-        <p className="mb-3">Post deleted</p>
+        <p className="mb-3">User deleted</p>
       )}
     </>
   );
