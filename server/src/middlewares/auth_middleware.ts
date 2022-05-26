@@ -48,3 +48,17 @@ export function verifyToken(req: Request, res: Response, next: NextFunction) {
     return res.sendStatus(401);
   }
 }
+
+export function verifyAdmin(req: Request, res: Response, next: NextFunction) {
+  try {
+    console.log(req.body.user);
+
+    if (req.body.user.role !== "ADMIN")
+      throw new Error("User role is not admin");
+
+    next();
+  } catch (e) {
+    console.log(e);
+    return res.sendStatus(401);
+  }
+}

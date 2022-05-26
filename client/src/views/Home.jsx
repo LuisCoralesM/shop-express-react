@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { fetchApi } from "../utils/response";
 import Title from "../components/menu/Title";
 import ItemsDisplay from "../components/items/ItemsDisplay";
 
@@ -6,11 +7,19 @@ export default function Home() {
   // FETCH API to get products images and data
   // To set in front here
   // then send it to ItemsDisplay
-  const items = [
-    { text: "Camisa numero 1" },
-    { text: "Camisa numero 2" },
-    { text: "Camisa numero 3" },
-  ];
+
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    async function fetchProducts() {
+      const response = await fetchApi("/dashboard/products/");
+
+      if (!response.ok) return console.log(response.status);
+
+      setItems(response.data.data);
+    }
+    fetchProducts();
+  }, []);
 
   return (
     <section>
