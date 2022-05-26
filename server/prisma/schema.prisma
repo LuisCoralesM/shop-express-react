@@ -24,25 +24,16 @@ enum Role {
 }
 
 model Order {
-    id         Int       @id @default(autoincrement())
-    address    Address   @relation(fields: [address_id], references: [id])
-    address_id Int
-    products   Product[]
-    total      Float
-    payment    String
-    created_at DateTime  @default(now())
-    updated_at DateTime? @updatedAt
-}
-
-model Address {
     id          Int       @id @default(autoincrement())
-    order       Order[]
-    direction   String
+    address     String
     postal_code String
     city        String
     province    String
     country     String
     phone       String
+    products    Product[]
+    total       Float
+    payment     String
     created_at  DateTime  @default(now())
     updated_at  DateTime? @updatedAt
 }
@@ -59,7 +50,7 @@ model Product {
     category    Category[] //shirt, pants, jogger, skirt
     created_at  DateTime   @default(now())
     updated_at  DateTime   @updatedAt
-    deleted_at  DateTime?  
+    deleted_at  DateTime?
 }
 
 model Category {

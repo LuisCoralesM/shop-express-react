@@ -1,5 +1,9 @@
 import { Router } from "express";
-import { users_controller, products_controller } from "../controllers/";
+import {
+  users_controller,
+  products_controller,
+  order_controller,
+} from "../controllers/";
 import { verifyAdmin } from "../middlewares/auth_middleware";
 
 const router = Router();
@@ -14,5 +18,10 @@ router.put("/users/:id", verifyAdmin, users_controller.updateUser); // Admin onl
 router.post("/products/", verifyAdmin, products_controller.postProduct); //ADMIN
 router.put("/products/:id", verifyAdmin, products_controller.putProduct); // ADMIN
 router.delete("/products/:id", verifyAdmin, products_controller.deleteProduct); // ADMIN
+
+router.get("/orders/:id", verifyAdmin, order_controller.getOneOrder); //ADMIN
+router.get("/orders/", verifyAdmin, order_controller.getOrders); //ADMIN
+router.post("/orders/", verifyAdmin, order_controller.postOrder); //ADMIN
+router.put("/orders/:id", verifyAdmin, order_controller.putOrder); //ADMIN
 
 export default router;
