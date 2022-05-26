@@ -17,7 +17,7 @@ export default function Nav({ props }) {
     ? [
         { name: "Admin", href: "/admin/", current: false },
         { name: "Users", href: "/admin/users", current: false },
-        // { name: "Products", href: "/admin/products", current: false },
+        { name: "Products", href: "/admin/products", current: false },
         { name: "Shop", href: "/", current: true },
       ]
     : [{ name: "Shop", href: "/", current: true }];

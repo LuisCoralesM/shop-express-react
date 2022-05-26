@@ -25,6 +25,12 @@ import Error from "./views/Error";
 import Admin from "./views/Admin";
 import ActionMenu from "./components/users/ActionMenu";
 
+import EditProduct from "./components/products/EditProduct";
+import ProductMenu from "./components/products/ProductMenu";
+import DeleteProduct from "./components/products/DeleteProduct";
+import Products from "./views/Products";
+import CreateProduct from "./components/products/CreateProduct";
+
 export default function App() {
   const [status, setStatus] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -97,6 +103,11 @@ export default function App() {
             <Route path="/admin/users/search" element={<SearchUser />} />
             <Route path="/admin/users/edit" element={<DeleteOwnUser />} />
             <Route path="/admin/users/actions" element={<ActionMenu />} />
+
+            <Route path="/admin/products" element={<Products />} />
+
+            <Route path="/admin/products/create" element={<CreateProduct />} />
+            <Route path="/admin/products/actions" element={<ProductMenu />} />
           </>
         ) : (
           <Route path="*" element={<Error />} />

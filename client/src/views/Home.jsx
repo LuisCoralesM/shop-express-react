@@ -12,7 +12,7 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchProducts() {
-      const response = await fetchApi("/dashboard/products/");
+      const response = await fetchApi("/products/");
 
       if (!response.ok) return console.log(response.status);
 
@@ -24,7 +24,7 @@ export default function Home() {
   return (
     <section>
       <Title props={{ title: "Clothing Shop" }} />
-      <ItemsDisplay props={{ items: items }}></ItemsDisplay>
+      <ItemsDisplay props={{ items: items, isHome: true }}></ItemsDisplay>
     </section>
   );
 }

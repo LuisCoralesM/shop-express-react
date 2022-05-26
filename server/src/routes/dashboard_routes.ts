@@ -11,8 +11,6 @@ router.delete("/users/:id", verifyAdmin, users_controller.deleteOneUser); // Adm
 router.delete("/users/", users_controller.deleteOwnUser); // Delete by current user id
 router.put("/users/:id", verifyAdmin, users_controller.updateUser); // Admin only, change role
 
-router.get("/products/:id", products_controller.getOneProduct);
-router.get("/products/", products_controller.getProducts);
 router.post("/products/", verifyAdmin, products_controller.postProduct); //ADMIN
 router.put("/products/:id", verifyAdmin, products_controller.putProduct); // ADMIN
 router.delete("/products/:id", verifyAdmin, products_controller.deleteProduct); // ADMIN

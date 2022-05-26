@@ -25,7 +25,7 @@ export async function postProduct(req: Request, res: Response) {
         title: req.body.title,
         description: req.body.description,
         unit_price: Number(req.body.unit_price),
-        image: req.body.image,
+        image: req.body.image ?? "",
         sale: Number(req.body.sale),
       },
     });
