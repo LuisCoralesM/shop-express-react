@@ -25,9 +25,7 @@ import Error from "./views/Error";
 import Admin from "./views/Admin";
 import ActionMenu from "./components/users/ActionMenu";
 
-import EditProduct from "./components/products/EditProduct";
 import ProductMenu from "./components/products/ProductMenu";
-import DeleteProduct from "./components/products/DeleteProduct";
 import Products from "./views/Products";
 import CreateProduct from "./components/products/CreateProduct";
 
