@@ -13,7 +13,7 @@ export default function ActionMenu({ props }) {
 
   useEffect(() => {
     async function fetchUser() {
-      const response = await fetchApi("/dashboard/users/all");
+      const response = await fetchApi("/api/dashboard/users/all");
 
       if (!response.ok) return console.log(response.status);
 

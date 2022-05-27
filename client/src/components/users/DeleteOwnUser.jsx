@@ -10,7 +10,7 @@ export default function DeleteOwnUser({ props }) {
   useEffect(() => {
     // GET OWN USER DATA TO THEN DELETE
     async function fetchOwnUser() {
-      const response = await fetchApi("/dashboard/users/", "GET");
+      const response = await fetchApi("/api/dashboard/users/", "GET");
 
       if (!response.ok) return console.log(response.status);
 
@@ -25,10 +25,10 @@ export default function DeleteOwnUser({ props }) {
 
   async function deleteUser(e) {
     e.preventDefault();
-    const delResponse = await fetchApi("/dashboard/users/", "DELETE");
+    const delResponse = await fetchApi("/api/dashboard/users/", "DELETE");
     if (!delResponse.ok) return console.log(delResponse.data.status);
 
-    const logResponse = await fetchApi("/auth/logout", "POST");
+    const logResponse = await fetchApi("/api/auth/logout", "POST");
     if (!logResponse.ok) return console.log(logResponse.data.status);
 
     setDeleted(true);

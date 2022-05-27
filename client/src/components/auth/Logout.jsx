@@ -15,7 +15,7 @@ export default function Logout({ props }) {
   async function logout(e) {
     e.preventDefault();
 
-    const response = await fetchApi("/auth/logout", "POST");
+    const response = await fetchApi("/api/auth/logout", "POST");
 
     if (!response.ok) return console.log(response.data.status);
 

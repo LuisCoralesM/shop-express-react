@@ -9,7 +9,7 @@ export default function EditUser({ user }) {
   async function updateUser(e) {
     e.preventDefault();
 
-    const response = await fetchApi("/dashboard/users/" + user.id, "PUT", {
+    const response = await fetchApi("/api/dashboard/users/" + user.id, "PUT", {
       role: newRole,
     });
 

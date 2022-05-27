@@ -39,7 +39,7 @@ export default function App() {
     async function getStatus() {
       try {
         setIsLoading(true);
-        const response = await fetchApi("/status");
+        const response = await fetchApi("/api/status");
         setStatus(response.ok);
       } catch (e) {
         console.log(e);

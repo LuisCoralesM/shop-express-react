@@ -17,7 +17,7 @@ export default function EditProduct({ product }) {
     e.preventDefault();
 
     const response = await fetchApi(
-      "/dashboard/products/" + product.id,
+      "/api/dashboard/products/" + product.id,
       "PUT",
       {
         title: editedProduct.title,

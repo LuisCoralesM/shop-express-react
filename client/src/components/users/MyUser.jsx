@@ -8,7 +8,7 @@ export default function MyUser({ props }) {
 
   useEffect(() => {
     async function fetchUser() {
-      const response = await fetchApi("/dashboard/users/");
+      const response = await fetchApi("/api/dashboard/users/");
 
       if (!response.ok) return console.log(response.status);
 
