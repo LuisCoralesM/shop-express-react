@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import MenuButtons from "../components/menu/MenuButtons";
 import Title from "../components/menu/Title";
-import { fetchApi } from "../utils/response";
 
 export default function Admin() {
   const items = [
