@@ -12,7 +12,7 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchProducts() {
-      const response = await fetchApi("/products/");
+      const response = await fetchApi("/api/products/");
 
       if (!response.ok) return console.log(response.status);
 

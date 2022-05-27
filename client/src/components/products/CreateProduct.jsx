@@ -16,7 +16,7 @@ export default function CreateProduct(props) {
   async function createProduct(e) {
     e.preventDefault();
 
-    const response = await fetchApi("/dashboard/products/", "POST", {
+    const response = await fetchApi("/api/dashboard/products/", "POST", {
       title: newProduct.title,
       description: newProduct.description,
       unit_price: newProduct.unit_price,

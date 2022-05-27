@@ -12,7 +12,7 @@ export default function SearchUser({ props }) {
     e.preventDefault();
     setSearch(true);
 
-    const response = await fetchApi("/dashboard/users/" + email);
+    const response = await fetchApi("/api/dashboard/users/" + email);
 
     if (!response.ok) return console.log(response.data.status);
 

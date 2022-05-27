@@ -17,7 +17,7 @@ export default function Login({ props }) {
   async function loginUser(e) {
     e.preventDefault();
 
-    const response = await fetchApi("/auth/login/", "POST", {
+    const response = await fetchApi("/api/auth/login/", "POST", {
       email: user.email,
       password: user.password,
     });

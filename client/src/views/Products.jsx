@@ -9,7 +9,7 @@ export default function Products({ props }) {
   ];
   return (
     <section>
-      <Title props={{ title: "Users" }} />
+      <Title props={{ title: "Products" }} />
       <MenuButtons props={{ items: items }}></MenuButtons>
     </section>
   );

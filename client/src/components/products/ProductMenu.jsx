@@ -13,7 +13,7 @@ export default function ProductMenu({ props }) {
 
   useEffect(() => {
     async function fetchProducts() {
-      const response = await fetchApi("/dashboard/products/");
+      const response = await fetchApi("/api/products/");
 
       if (!response.ok) return console.log(response.status);
 

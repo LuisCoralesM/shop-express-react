@@ -8,7 +8,10 @@ export default function DeleteUser({ user }) {
   async function deleteUser(e) {
     e.preventDefault();
 
-    const response = await fetchApi("/dashboard/users/" + user.id, "DELETE");
+    const response = await fetchApi(
+      "/api/dashboard/users/" + user.id,
+      "DELETE"
+    );
 
     if (!response.ok) return console.log(response.data.status);
 
