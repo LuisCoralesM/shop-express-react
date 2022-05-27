@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Serve static files from the React frontend app
-app.use(express.static(join(__dirname, "/../../client/public")));
+app.use(express.static(join(__dirname, "/../../client/public/")));
 
 app.get("/health", async (req: Request, res: Response) => {
   return res.send("ok");
@@ -35,7 +35,7 @@ app.use("/", router);
 
 // AFTER defining routes: Anything that doesn't match what's above, send back index.html; (the beginning slash ('/') in the string is important!)
 app.get("*", (req, res) => {
-  res.sendFile(join(__dirname + "/../../../client/public/index.html"));
+  res.sendFile(join(__dirname + "/../../client/public/index.html"));
 });
 
 app.use((req: Request, res: Response) => {
