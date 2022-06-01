@@ -29,6 +29,8 @@ import ProductMenu from "./components/products/ProductMenu";
 import Products from "./views/Products";
 import CreateProduct from "./components/products/CreateProduct";
 
+import Cart from "./views/Cart";
+
 export default function App() {
   const [status, setStatus] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -87,6 +89,8 @@ export default function App() {
                 />
               }
             />
+
+            <Route path="/cart" element={<Cart />} />
           </>
         ) : (
           <Route path="*" element={<Navigate to="/auth/login" replace />} />

@@ -4,11 +4,8 @@ import Title from "../components/menu/Title";
 import ItemsDisplay from "../components/items/ItemsDisplay";
 
 export default function Home() {
-  // FETCH API to get products images and data
-  // To set in front here
-  // then send it to ItemsDisplay
-
   const [items, setItems] = useState([]);
+  const cartItems = [];
 
   useEffect(() => {
     async function fetchProducts() {
@@ -21,10 +18,23 @@ export default function Home() {
     fetchProducts();
   }, []);
 
+  function addItemsToCart(items) {
+    localStorage.setItem("cartItems", JSON.stringify(items));
+  }
+
   return (
     <section>
-      <Title props={{ title: "Clothing Shop" }} />
-      <ItemsDisplay props={{ items: items, isHome: true }}></ItemsDisplay>
+      <div className="flex gap-10">
+        <Title props={{ title: "Clothing Shop" }} />
+        <button onClick={() => addItemsToCart(cartItems)}>Add to cart</button>
+      </div>
+      <ItemsDisplay
+        props={{
+          items: items,
+          isHome: true,
+          cartItems: cartItems,
+        }}
+      ></ItemsDisplay>
     </section>
   );
 }
