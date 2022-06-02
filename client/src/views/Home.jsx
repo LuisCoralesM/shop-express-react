@@ -24,9 +24,11 @@ export default function Home() {
 
   return (
     <section>
-      <div className="flex gap-10">
+      <div className="flex gap-10 justify-between">
         <Title props={{ title: "Clothing Shop" }} />
-        <button onClick={() => addItemsToCart(cartItems)}>Add to cart</button>
+        <button className="border-2" onClick={() => addItemsToCart(cartItems)}>
+          Add to cart
+        </button>
       </div>
       <ItemsDisplay
         props={{
