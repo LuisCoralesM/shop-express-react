@@ -30,6 +30,8 @@ import Products from "./views/Products";
 import CreateProduct from "./components/products/CreateProduct";
 
 import Cart from "./views/Cart";
+import Orders from "./views/Orders";
+import SearchOrder from "./components/orders/SearchOrder";
 
 export default function App() {
   const [status, setStatus] = useState(false);
@@ -110,6 +112,9 @@ export default function App() {
 
             <Route path="/admin/products/create" element={<CreateProduct />} />
             <Route path="/admin/products/actions" element={<ProductMenu />} />
+
+            <Route path="/admin/orders" element={<Orders />} />
+            <Route path="/admin/orders/search" element={<SearchOrder />} />
           </>
         ) : (
           <Route path="*" element={<Error />} />
