@@ -6,6 +6,7 @@ export default function Admin() {
   const items = [
     { link: "/admin/users/", text: "Users" },
     { link: "/admin/products/", text: "Products" },
+    { link: "/admin/orders/", text: "Orders" },
   ];
 
   return (

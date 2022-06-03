@@ -51,8 +51,6 @@ export function verifyToken(req: Request, res: Response, next: NextFunction) {
 
 export function verifyAdmin(req: Request, res: Response, next: NextFunction) {
   try {
-    console.log(req.body.user);
-
     if (req.body.user.role !== "ADMIN")
       throw new Error("User role is not admin");
 
