@@ -19,7 +19,6 @@ export default function OrderMenu({ props }) {
 
     if (!response.ok) return console.log(response.status);
 
-    console.log(response.data.data);
     setOrder(response.data.data);
   }
 
