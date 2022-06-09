@@ -2,23 +2,21 @@ import React from "react";
 
 export default function OrderItem({ order }) {
   return order !== undefined ? (
-    <div className="flex gap-5 text-lg justify-between border-2">
+    <div className="flex gap-5 text-lg justify-between border-2 p-2">
       <li className="list-none">
-        {order.id +
+        {"ID: " +
+          order.id +
           " - " +
-          order.address +
-          " - " +
-          order.city +
-          " - " +
+          "Province/Country: " +
           order.province +
-          " - " +
+          "/" +
           order.country +
           " - " +
-          order.phone +
+          " Total: " +
+          order.total +
           " - " +
-          order.created_at +
-          " - " +
-          order.updated_at}
+          "Date: " +
+          new Date(order.created_at).toLocaleDateString("en-UK")}
       </li>
     </div>
   ) : (
