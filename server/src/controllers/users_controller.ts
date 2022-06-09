@@ -1,19 +1,20 @@
 import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
+import {
+  deleteUser,
+  findAllUsers,
+  findUserByEmail,
+  findUserById,
+  updateUserData,
+} from "../data/users_data";
 
 const prisma = new PrismaClient();
 
 /** To GET own user route */
 export async function getOwnUser(req: Request, res: Response) {
   try {
-    const user = await prisma.user.findUnique({
-      where: {
-        id: Number(req.body.user.id),
-      },
-    });
-
     return res.status(200).json({
-      data: user,
+      data: await findUserById(Number(req.body.user.id)),
     });
   } catch (e) {
     console.log(e);
@@ -24,10 +25,8 @@ export async function getOwnUser(req: Request, res: Response) {
 /** To GET users route */
 export async function getAllUser(req: Request, res: Response) {
   try {
-    const user = await prisma.user.findMany();
-
     return res.status(200).json({
-      data: user,
+      data: await findAllUsers(),
     });
   } catch (e) {
     console.log(e);
@@ -38,14 +37,8 @@ export async function getAllUser(req: Request, res: Response) {
 /** To GET users by id route */
 export async function getOneUser(req: Request, res: Response) {
   try {
-    const user = await prisma.user.findUnique({
-      where: {
-        email: req.params.email,
-      },
-    });
-
     return res.status(200).json({
-      data: user,
+      data: await findUserByEmail(req.params.email),
     });
   } catch (e) {
     console.log(e);
@@ -56,17 +49,8 @@ export async function getOneUser(req: Request, res: Response) {
 /** To DELETE one user route */
 export async function deleteOneUser(req: Request, res: Response) {
   try {
-    const user = await prisma.user.update({
-      where: {
-        id: Number(req.params.id),
-      },
-      data: {
-        deleted_at: new Date(),
-      },
-    });
-
     return res.status(200).json({
-      data: user,
+      data: await deleteUser(Number(req.params.id)),
     });
   } catch (e) {
     console.log(e);
@@ -76,17 +60,8 @@ export async function deleteOneUser(req: Request, res: Response) {
 
 export async function updateUser(req: Request, res: Response) {
   try {
-    const user = await prisma.user.update({
-      where: {
-        id: Number(req.params.id),
-      },
-      data: {
-        role: req.body.role,
-      },
-    });
-
     return res.status(200).json({
-      data: user,
+      data: await updateUserData(Number(req.params.id), req.body.role),
     });
   } catch (e) {
     console.log(e);
@@ -97,17 +72,8 @@ export async function updateUser(req: Request, res: Response) {
 /** To DELETE users route */
 export async function deleteOwnUser(req: Request, res: Response) {
   try {
-    const user = await prisma.user.update({
-      where: {
-        id: Number(req.body.user.id),
-      },
-      data: {
-        deleted_at: new Date(),
-      },
-    });
-
     return res.status(200).json({
-      data: user,
+      data: await deleteUser(Number(req.body.user.id)),
     });
   } catch (e) {
     console.log(e);

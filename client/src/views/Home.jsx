@@ -5,6 +5,8 @@ import ItemsDisplay from "../components/items/ItemsDisplay";
 
 export default function Home() {
   const [items, setItems] = useState([]);
+  const [hasClickedItem, setHasClickedItem] = useState(false);
+
   const cartItems = [];
 
   useEffect(() => {
@@ -24,9 +26,16 @@ export default function Home() {
 
   return (
     <section>
-      <div className="flex gap-10 justify-between">
+      <div className="flex justify-between">
         <Title props={{ title: "Clothing Shop" }} />
-        <button className="border-2" onClick={() => addItemsToCart(cartItems)}>
+        {hasClickedItem ? <p className="p-3">Added items to cart</p> : ""}
+        <button
+          className="border-2 p-2 bg-gray-900 hover:bg-slate-600"
+          onClick={() => {
+            setHasClickedItem(true);
+            addItemsToCart(cartItems);
+          }}
+        >
           Add to cart
         </button>
       </div>

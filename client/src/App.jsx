@@ -32,6 +32,7 @@ import CreateProduct from "./components/products/CreateProduct";
 import Cart from "./views/Cart";
 import Orders from "./views/Orders";
 import SearchOrder from "./components/orders/SearchOrder";
+import AllOrders from "./components/orders/AllOrders";
 
 export default function App() {
   const [status, setStatus] = useState(false);
@@ -115,6 +116,7 @@ export default function App() {
 
             <Route path="/admin/orders" element={<Orders />} />
             <Route path="/admin/orders/search" element={<SearchOrder />} />
+            <Route path="/admin/orders/all" element={<AllOrders />} />
           </>
         ) : (
           <Route path="*" element={<Error />} />
