@@ -8,6 +8,44 @@ export async function findAllOrders() {
       include: {
         products: true,
       },
+      orderBy: {
+        created_at: "desc",
+      },
+    });
+  } catch (e) {
+    return [];
+  }
+}
+
+export async function findAllOrdersByCountry() {
+  try {
+    return await prisma.order.groupBy({
+      by: ["country"],
+      _sum: {
+        total: true,
+      },
+    });
+  } catch (e) {
+    return [];
+  }
+}
+
+export async function findAllOrdersWhere(id: number) {
+  try {
+    return await prisma.order.findMany({
+      where: {
+        products: {
+          some: {
+            id: id,
+          },
+        },
+      },
+      include: {
+        products: true,
+      },
+      orderBy: {
+        created_at: "desc",
+      },
     });
   } catch (e) {
     return [];

@@ -16,6 +16,9 @@ export async function findUniqueProduct(id: number) {
       where: {
         id: id,
       },
+      include: {
+        order: true,
+      },
     });
   } catch (error) {
     return undefined;
