@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Title from "../menu/Title";
-import { setState } from "../../utils/hooks";
 import { fetchApi } from "../../utils/response";
-import OrderItem from "../orders/OrderItem";
 
 export default function ProductStats() {
   const [products, setProducts] = useState([]);
   const [filteredProduct, setFilteredProduct] = useState();
-  const [productToSearch, setProductsToSearch] = useState(0);
+  const [productToSearch] = useState(0);
 
   useEffect(() => {
     async function fetchProducts() {
