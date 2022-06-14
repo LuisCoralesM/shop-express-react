@@ -68,8 +68,13 @@ export default function CreateOrder({ props }) {
             <br />
             <br />
             <label className="text-lg">Country</label>
-            <select id="country" name="country" onChange={setState(setAddress)}>
-              <option>select country</option>
+            <select
+              className="w-full bg-gray-700 border-transparent rounded"
+              name="country"
+              onChange={setState(setAddress)}
+              required
+              defaultValue="Select country"
+            >
               <option value="AF">Afghanistan</option>
               <option value="AX">Aland Islands</option>
               <option value="AL">Albania</option>
@@ -314,7 +319,7 @@ export default function CreateOrder({ props }) {
               <option value="UA">Ukraine</option>
               <option value="AE">United Arab Emirates</option>
               <option value="GB">United Kingdom</option>
-              <option value="US">United States</option>
+              <option value="US" selected>United States</option>
               <option value="UM">United States Minor Outlying Islands</option>
               <option value="UY">Uruguay</option>
               <option value="UZ">Uzbekistan</option>

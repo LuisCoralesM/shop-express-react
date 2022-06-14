@@ -5,9 +5,6 @@ const prisma = new PrismaClient();
 export async function findAllOrders() {
   try {
     return await prisma.order.findMany({
-      include: {
-        products: true,
-      },
       orderBy: {
         created_at: "desc",
       },
@@ -30,18 +27,13 @@ export async function findAllOrdersByCountry() {
   }
 }
 
-export async function findAllOrdersWhere(id: number) {
+export async function findAllOrdersByProduct(id: number) {
   try {
     return await prisma.order.findMany({
       where: {
         products: {
-          some: {
-            id: id,
-          },
+          has: id,
         },
-      },
-      include: {
-        products: true,
       },
       orderBy: {
         created_at: "desc",
@@ -57,9 +49,6 @@ export async function findUniqueOrder(id: number) {
     return await prisma.order.findUnique({
       where: {
         id: id,
-      },
-      include: {
-        products: true,
       },
     });
   } catch (error) {
@@ -89,9 +78,7 @@ export async function createOrder(
         phone,
         total,
         payment,
-        products: {
-          connect: products.map((id: number) => ({ id: id })),
-        },
+        products: products.map((id: number) => id),
       },
     });
   } catch (error) {

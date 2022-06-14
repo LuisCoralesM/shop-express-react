@@ -1,4 +1,6 @@
+import { Product } from "@prisma/client";
 import { Request, Response } from "express";
+import { findAllOrdersByProduct } from "../data/orders_data";
 import {
   createProduct,
   findAllProducts,
@@ -6,6 +8,10 @@ import {
   updateProduct,
   deleteProducts,
 } from "../data/products_data";
+import {
+  compareTwoProductsByMonth,
+  getProductSales,
+} from "../services/products_stats";
 
 /** To GET products route */
 export async function getProducts(req: Request, res: Response) {
@@ -73,6 +79,40 @@ export async function deleteProduct(req: Request, res: Response) {
   try {
     return res.status(200).json({
       data: await deleteProducts(Number(req.body.id)),
+    });
+  } catch (e) {
+    console.log(e);
+    return res.sendStatus(500);
+  }
+}
+
+export async function getTwoProductsStats(req: Request, res: Response) {
+  try {
+    let productOneID = Number(req.body.productOneID);
+    let productTwoID = Number(req.body.productTwoID);
+
+    return res.status(200).json({
+      data: compareTwoProductsByMonth(
+        await findUniqueProduct(productOneID),
+        await findUniqueProduct(productTwoID),
+        await findAllOrdersByProduct(productOneID),
+        await findAllOrdersByProduct(productTwoID),
+        Number(req.params.month)
+      ),
+    });
+  } catch (e) {
+    console.log(e);
+    return res.sendStatus(500);
+  }
+}
+
+export async function getProductSalesStats(req: Request, res: Response) {
+  try {
+    return res.status(200).json({
+      data: getProductSales(
+        await findAllOrdersByProduct(Number(req.params.id)),
+        await findUniqueProduct(Number(req.params.id))
+      ),
     });
   } catch (e) {
     console.log(e);
