@@ -10,13 +10,27 @@ export function compareSalesByDates(
   endDate: Date
 ) {
   return orders.filter(
-    (item) => item.created_at >= startDate && item.created_at <= endDate
+    (item) =>
+      new Date(
+        item.created_at.getFullYear(),
+        item.created_at.getMonth(),
+        item.created_at.getDate() - 1
+      ) >= startDate &&
+      new Date(
+        item.created_at.getFullYear(),
+        item.created_at.getMonth(),
+        item.created_at.getDate() - 1
+      ) <= endDate
   );
 }
 
-export function compareSalesByMonth(orders: Order[], date: Date = new Date()) {
+export function compareSalesByMonth(orders: Order[], date: Date) {
   let filteredOrders = orders
-    .filter((item) => item.created_at.getMonth() === date.getMonth())
+    .filter(
+      (item) =>
+        item.created_at.getMonth() === date.getMonth() &&
+        item.created_at.getFullYear() === date.getFullYear()
+    )
     .sort(
       (a, b) => a.created_at.getMilliseconds() - b.created_at.getMilliseconds()
     )

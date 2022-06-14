@@ -44,7 +44,9 @@ export default function Admin() {
   return (
     <>
       <section>
-        <Title props={{ title: "Latest orders" }} />
+        <div className="flex justify-center">
+          <Title props={{ title: "Latest orders" }} />
+        </div>
 
         <div className="flex flex-col md:flex-row justify-center gap-x-3">
           {orders.map((order) => (
@@ -58,12 +60,17 @@ export default function Admin() {
       </section>
 
       <section>
-        <Title
-          props={{
-            title:
-              "Total sales on " + getMonthName(date) + " " + date.getFullYear(),
-          }}
-        />
+        <div className="flex justify-center">
+          <Title
+            props={{
+              title:
+                "Total sales on " +
+                getMonthName(date) +
+                " " +
+                date.getFullYear(),
+            }}
+          />
+        </div>
         <div className="flex justify-center bg-white h-96">
           <Line
             options={{ maintainAspectRatio: false }}
@@ -80,7 +87,7 @@ export default function Admin() {
               datasets: [
                 {
                   id: 1,
-                  label: "Orders",
+                  label: "Orders totals",
                   data: sales,
                   borderWidth: 5,
                   pointRadius: 5,
@@ -119,17 +126,28 @@ export default function Admin() {
         </div>
         <div className="flex justify-center mt-5 gap-x-3">
           <Button
-            props={{ link: "/admin/orders/", text: "Compare sales dates" }}
+            props={{
+              link: "/admin/stats/orders/country/",
+              text: "Countries chart",
+            }}
+          />
+          <Button
+            props={{
+              link: "/admin/stats/orders/compare",
+              text: "Get sales dates",
+            }}
           />
         </div>
       </section>
 
       <section>
-        <Title props={{ title: "Products" }} />
+        <div className="flex justify-center">
+          <Title props={{ title: "Products" }} />
+        </div>
 
         <div className="flex justify-center mt-5 gap-x-3">
           <Button
-            props={{ link: "/admin/orders/", text: "Compare products" }}
+            props={{ link: "/admin/stats/products", text: "Compare products" }}
           />
           <Button
             props={{ link: "/admin/products", text: "Manage products" }}
