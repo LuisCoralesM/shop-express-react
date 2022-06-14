@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Button from "../components/menu/Button";
 import Title from "../components/menu/Title";
 import OrderItem from "../components/orders/OrderItem";
-import { getDaysInMonth, getMonthName } from "../utils/getDateName";
+import { getDaysInMonth, getMonthName } from "../utils/getDatesData";
 import { fetchApi } from "../utils/response";
 
 import { Line } from "react-chartjs-2";
@@ -91,7 +91,7 @@ export default function Admin() {
                   data: sales,
                   borderWidth: 5,
                   pointRadius: 5,
-                  backgroundColor: "black",
+                  backgroundColor: "navy",
                 },
               ],
             }}
@@ -147,10 +147,16 @@ export default function Admin() {
 
         <div className="flex justify-center mt-5 gap-x-3">
           <Button
-            props={{ link: "/admin/stats/products/", text: "Get products stats" }}
+            props={{
+              link: "/admin/stats/products/",
+              text: "Get products stats",
+            }}
           />
           <Button
-            props={{ link: "/admin/stats/products/compare", text: "Compare products" }}
+            props={{
+              link: "/admin/stats/products/compare",
+              text: "Compare products",
+            }}
           />
           <Button
             props={{ link: "/admin/products", text: "Manage products" }}
