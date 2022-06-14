@@ -14,13 +14,23 @@ export function compareSalesByDates(
       new Date(
         item.created_at.getFullYear(),
         item.created_at.getMonth(),
-        item.created_at.getDate() - 1
-      ) >= startDate &&
+        item.created_at.getDate()
+      ) >=
+        new Date(
+          startDate.getFullYear(),
+          startDate.getMonth(),
+          startDate.getDate() + 1
+        ) &&
       new Date(
         item.created_at.getFullYear(),
         item.created_at.getMonth(),
-        item.created_at.getDate() - 1
-      ) <= endDate
+        item.created_at.getDate()
+      ) <=
+        new Date(
+          endDate.getFullYear(),
+          endDate.getMonth(),
+          endDate.getDate() + 1
+        )
   );
 }
 

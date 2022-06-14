@@ -11,7 +11,7 @@ export default function CompareSales() {
     endDate: null,
   });
 
-  async function fetchSalesByCountry(e) {
+  async function fetchSalesByDates(e) {
     e.preventDefault();
 
     if (dates.endDate == null || dates.startDate == null) return;
@@ -22,7 +22,6 @@ export default function CompareSales() {
       dates
     );
 
-    console.log(response);
     if (!response.ok) return console.log(response.status);
 
     setSales(response.data.data);
@@ -36,7 +35,7 @@ export default function CompareSales() {
         }}
       />
 
-      <form onSubmit={fetchSalesByCountry} className="flex justify-between">
+      <form onSubmit={fetchSalesByDates} className="flex justify-between">
         <label className="text-lg py-2">Start Date</label>
         <input
           className="w-4/12 bg-gray-700 border-transparent rounded"

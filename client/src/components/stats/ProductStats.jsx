@@ -29,12 +29,10 @@ export default function ProductStats() {
       "/api/dashboard/stats/products/" + e.target.value
     );
 
-    console.log(response);
     if (!response.ok) return console.log(response.status);
 
     setFilteredProduct(response.data.data);
   }
-  console.log(filteredProduct);
 
   return (
     <>
