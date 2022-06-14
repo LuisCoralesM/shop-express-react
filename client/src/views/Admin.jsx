@@ -14,6 +14,8 @@ export default function Admin() {
   const [orders, setOrders] = useState([]);
   const [sales, setSales] = useState([]);
   const [date, setDate] = useState(new Date());
+  const [today] = useState(new Date());
+  const [buttons, setButtons] = useState([0, 0]);
 
   useEffect(() => {
     async function fetchLatestOrders() {
@@ -56,7 +58,12 @@ export default function Admin() {
       </section>
 
       <section>
-        <Title props={{ title: "Total sales on " + getMonthName(date) }} />
+        <Title
+          props={{
+            title:
+              "Total sales on " + getMonthName(date) + " " + date.getFullYear(),
+          }}
+        />
         <div className="flex justify-center bg-white h-96">
           <Line
             options={{ maintainAspectRatio: false }}
@@ -88,8 +95,11 @@ export default function Admin() {
           <button
             className="rounded-lg px-4 py-2 border-2 border-orange-500 text-white hover:bg-orange-600 hover:border-orange-600 hover:text-gray-900 duration-300"
             onClick={() => {
-              let month = date.getMonth();
-              setDate(new Date(new Date().setMonth(month - 1)));
+              buttons[0]++;
+              buttons[1]--;
+              setDate(
+                new Date(new Date().setMonth(today.getMonth() - buttons[0]))
+              );
             }}
           >
             Previous month
@@ -97,8 +107,11 @@ export default function Admin() {
           <button
             className="rounded-lg px-4 py-2 border-2 border-orange-500 text-white hover:bg-orange-600 hover:border-orange-600 hover:text-gray-900 duration-300"
             onClick={() => {
-              let month = date.getMonth();
-              setDate(new Date(new Date().setMonth(month + 1)));
+              buttons[0]--;
+              buttons[1]++;
+              setDate(
+                new Date(new Date().setMonth(today.getMonth() + buttons[1]))
+              );
             }}
           >
             Next month
