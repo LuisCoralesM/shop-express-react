@@ -35,6 +35,7 @@ import SearchOrder from "./components/orders/SearchOrder";
 import AllOrders from "./components/orders/AllOrders";
 import Countries from "./components/stats/Countries";
 import CompareSales from "./components/stats/CompareSales";
+import CompareProducts from "./components/stats/CompareProducts";
 
 export default function App() {
   const [status, setStatus] = useState(false);
@@ -112,10 +113,8 @@ export default function App() {
             <Route path="/admin/users/actions" element={<ActionMenu />} />
 
             <Route path="/admin/stats/orders/country" element={<Countries />} />
-            <Route
-              path="/admin/stats/orders/compare"
-              element={<CompareSales />}
-            />
+            <Route path="/admin/stats/orders/compare" element={<CompareSales />} />
+            <Route path="/admin/stats/products/compare" element={<CompareProducts />} />
 
             <Route path="/admin/products" element={<Products />} />
 

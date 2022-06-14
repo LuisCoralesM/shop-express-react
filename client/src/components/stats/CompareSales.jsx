@@ -37,14 +37,14 @@ export default function CompareSales() {
       />
 
       <form onSubmit={fetchSalesByCountry} className="flex justify-between">
-        <label>Start Date</label>
+        <label className="text-lg py-2">Start Date</label>
         <input
           className="w-4/12 bg-gray-700 border-transparent rounded"
           type="date"
           name="startDate"
           onChange={setState(setDates)}
         />
-        <label>End Date</label>
+        <label className="text-lg py-2">End Date</label>
         <input
           className="w-4/12 bg-gray-700 border-transparent rounded"
           type="date"

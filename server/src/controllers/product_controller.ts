@@ -9,7 +9,7 @@ import {
   deleteProducts,
 } from "../data/products_data";
 import {
-  compareTwoProductsByMonth,
+  compareTwoProducts,
   getProductSales,
 } from "../services/products_stats";
 
@@ -92,12 +92,11 @@ export async function getTwoProductsStats(req: Request, res: Response) {
     let productTwoID = Number(req.body.productTwoID);
 
     return res.status(200).json({
-      data: compareTwoProductsByMonth(
+      data: compareTwoProducts(
         await findUniqueProduct(productOneID),
         await findUniqueProduct(productTwoID),
         await findAllOrdersByProduct(productOneID),
-        await findAllOrdersByProduct(productTwoID),
-        Number(req.params.month)
+        await findAllOrdersByProduct(productTwoID)
       ),
     });
   } catch (e) {

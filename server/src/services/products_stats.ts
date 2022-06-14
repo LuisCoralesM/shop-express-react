@@ -1,25 +1,19 @@
 import { Product, Order } from "@prisma/client";
 
-export function compareTwoProductsByMonth(
+export function compareTwoProducts(
   productOne: Product | undefined | null,
   productTwo: Product | undefined | null,
   ordersProductOne: Order[],
-  ordersProductTwo: Order[],
-  month: number = 3
+  ordersProductTwo: Order[]
 ) {
   return {
     productOneQuantity: ordersProductOne.length,
     productOneSales: (productOne?.unit_price ?? 0) * ordersProductOne.length,
-    productOneOrders: ordersProductOne.filter(
-      (item) => item.created_at.getMonth() === month - 1
-    ),
+    productOneOrders: ordersProductOne,
 
     productTwoQuantity: ordersProductTwo.length,
     productTwoSales: (productTwo?.unit_price ?? 0) * ordersProductTwo.length,
-    productTwoOrders: ordersProductTwo.filter(
-      (item) => item.created_at.getMonth() === month - 1
-    ),
-    month,
+    productTwoOrders: ordersProductTwo,
   };
 }
 

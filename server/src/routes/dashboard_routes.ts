@@ -35,7 +35,7 @@ router.get("/stats/orders/total", verifyAdmin, order_controller.getSalesByTotals
 router.post("/stats/orders/", verifyAdmin, order_controller.getSalesByMonth);
 
 // PRODUCTS STATS
-router.get("/stats/products/compare/:month", verifyAdmin, products_controller.getTwoProductsStats);
+router.post("/stats/products/compare", verifyAdmin, products_controller.getTwoProductsStats);
 router.get("/stats/products/:id", verifyAdmin, products_controller.getProductSalesStats);
 
 export default router;
