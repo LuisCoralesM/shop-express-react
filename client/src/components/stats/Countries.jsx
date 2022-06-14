@@ -5,22 +5,11 @@ import { fetchApi } from "../../utils/response";
 import { Doughnut } from "react-chartjs-2";
 import { CategoryScale } from "chart.js";
 import Chart from "chart.js/auto";
+import { colorGenerator } from "../../utils/colorGenerator";
 Chart.register(CategoryScale);
 
 export default function Countries() {
   const [sales, setSales] = useState([]);
-
-  const colors = [
-    "rgb(55, 205, 86)",
-    "rgb(55, 105, 86)",
-    "rgb(255, 99, 132)",
-    "rgb(54, 162, 235)",
-    "rgb(255, 205, 86)",
-    "rgb(205, 105, 86)",
-    "rgb(5, 55, 86)",
-    "rgb(105, 205, 86)",
-    "rgb(105, 105, 86)",
-  ];
 
   useEffect(() => {
     async function fetchSalesByCountry() {
@@ -48,7 +37,7 @@ export default function Countries() {
               datasets: [
                 {
                   data: sales.map((a) => a._sum.total),
-                  backgroundColor: colors.map((c) => c),
+                  backgroundColor: sales.map((a) => colorGenerator()),
                 },
               ],
 
