@@ -22,17 +22,17 @@ router.put("/products/:id", verifyAdmin, products_controller.putProduct); // ADM
 router.delete("/products/:id", verifyAdmin, products_controller.deleteProduct); // ADMIN
 
 // ORDERS
-router.get("/orders/country/:id", verifyAdmin, order_controller.getOrdersByCountry); //ADMIN
+router.get("/orders/latest/:id", verifyAdmin, order_controller.getLatestOrdersSales); // ADMIN
+router.get("/orders/country/", verifyAdmin, order_controller.getOrdersByCountry); //ADMIN
 router.get("/orders/:id", verifyAdmin, order_controller.getOneOrder); //ADMIN
 router.get("/orders/", verifyAdmin, order_controller.getOrders); //ADMIN
 router.post("/orders/", verifyAdmin, order_controller.postOrder); //ADMIN
 router.put("/orders/:id", verifyAdmin, order_controller.putOrder); //ADMIN
 
 // ORDERS/SALES STATS
-router.get("/stats/orders/latest/:id", verifyAdmin, order_controller.getLatestSales);
-router.get("/stats/orders/dates", verifyAdmin, order_controller.getSalesStatsByDates);
+router.post("/stats/orders/dates", verifyAdmin, order_controller.getSalesStatsByDates);
 router.get("/stats/orders/total", verifyAdmin, order_controller.getSalesByTotals);
-router.get("/stats/orders/:month", verifyAdmin, order_controller.getSalesByMonth);
+router.post("/stats/orders/", verifyAdmin, order_controller.getSalesByMonth);
 
 // PRODUCTS STATS
 router.get("/stats/products/compare/:month", verifyAdmin, products_controller.getTwoProductsStats);

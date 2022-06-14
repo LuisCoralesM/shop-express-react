@@ -94,7 +94,7 @@ export async function getSalesStatsByDates(req: Request, res: Response) {
   }
 }
 
-export async function getLatestSales(req: Request, res: Response) {
+export async function getLatestOrdersSales(req: Request, res: Response) {
   try {
     return res.status(200).json({
       data: lastNOrders(await findAllOrders(), Number(req.params.id)),
@@ -108,10 +108,7 @@ export async function getLatestSales(req: Request, res: Response) {
 export async function getSalesByMonth(req: Request, res: Response) {
   try {
     return res.status(200).json({
-      data: compareSalesByMonth(
-        await findAllOrders(),
-        Number(req.params.month)
-      ),
+      data: compareSalesByMonth(await findAllOrders(), new Date(req.body.date)),
     });
   } catch (e) {
     console.log(e);

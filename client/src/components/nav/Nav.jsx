@@ -3,13 +3,10 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import logo from "../../assets/buckethat.png";
-import cart from "../../assets/cart.png";
 
 import { Link, useLocation } from "react-router-dom";
 
 import settings from "../../assets/settings.png";
-
-const cartPath = "/cart";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -22,6 +19,7 @@ export default function Nav({ props }) {
         { name: "Users", href: "/admin/users", current: false },
         { name: "Products", href: "/admin/products", current: false },
         { name: "Orders", href: "/admin/orders", current: false },
+        { name: "Cart", href: "/cart", current: false },
         { name: "Shop", href: "/", current: true },
       ]
     : [{ name: "Shop", href: "/", current: true }];
@@ -82,11 +80,6 @@ export default function Nav({ props }) {
                     ))}
                   </div>
                 </div>
-              </div>
-              <div>
-                <Link to={cartPath} key="cart">
-                  <img className="h-8 w-8" src={cart} alt="cart" />
-                </Link>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 {/* Profile dropdown */}

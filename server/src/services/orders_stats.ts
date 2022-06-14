@@ -9,25 +9,39 @@ export function compareSalesByDates(
   startDate: Date,
   endDate: Date
 ) {
-  console.log(startDate.toDateString() + " | " + endDate.toDateString());
-  console.log(
-    orders[0].created_at >= startDate && orders[0].created_at <= endDate
-  );
-
   return orders.filter(
     (item) => item.created_at >= startDate && item.created_at <= endDate
   );
 }
 
-export function compareSalesByMonth(
-  orders: Order[],
-  monthNumber: number = new Date().getMonth()
-) {
-  return orders.filter(
-    (item) => item.created_at.getMonth() === monthNumber - 1
+export function compareSalesByMonth(orders: Order[], date: Date = new Date()) {
+  let filteredOrders = orders
+    .filter((item) => item.created_at.getMonth() === date.getMonth())
+    .sort(
+      (a, b) => a.created_at.getMilliseconds() - b.created_at.getMilliseconds()
+    )
+    .reverse();
+
+  let arr = Array.from(
+    {
+      length: getDaysInMonth(date.getFullYear(), date.getMonth()),
+    },
+    (_, i) => (i = 0)
   );
+
+  for (let i = 0; i < arr.length; i++) {
+    arr[i] = filteredOrders
+      .filter((order) => i === order.created_at.getDate())
+      .reduce((acc, a) => acc + a.total, 0);
+  }
+
+  return arr;
 }
 
 export function ordersByTotals(orders: Order[]) {
   return orders.sort((a, b) => a.total - b.total).reverse();
+}
+
+export function getDaysInMonth(year: number, month: number) {
+  return new Date(year, month, 0).getDate();
 }
