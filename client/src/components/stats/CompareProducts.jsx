@@ -37,13 +37,10 @@ export default function CompareProducts() {
       productsToSearch
     );
 
-    console.log(response);
     if (!response.ok) return console.log(response.status);
 
     setFilteredProducts(response.data.data);
   }
-
-  console.log(filteredProducts);
 
   return (
     <section>
@@ -63,6 +60,7 @@ export default function CompareProducts() {
           name="productOneID"
           onChange={setState(setProductsToSearch)}
         >
+          <option value="-">-</option>
           {products.map((a) => (
             <option>{a.id}</option>
           ))}
@@ -73,6 +71,7 @@ export default function CompareProducts() {
           name="productTwoID"
           onChange={setState(setProductsToSearch)}
         >
+          <option value="-">-</option>
           {products.map((a) => (
             <option>{a.id}</option>
           ))}

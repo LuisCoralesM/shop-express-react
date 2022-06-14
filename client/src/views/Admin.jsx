@@ -147,6 +147,9 @@ export default function Admin() {
 
         <div className="flex justify-center mt-5 gap-x-3">
           <Button
+            props={{ link: "/admin/stats/products/", text: "Get products stats" }}
+          />
+          <Button
             props={{ link: "/admin/stats/products/compare", text: "Compare products" }}
           />
           <Button
