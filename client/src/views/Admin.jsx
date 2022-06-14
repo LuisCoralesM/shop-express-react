@@ -15,7 +15,7 @@ export default function Admin() {
   const [sales, setSales] = useState([]);
   const [date, setDate] = useState(new Date());
   const [today] = useState(new Date());
-  const [buttons, setButtons] = useState([0, 0]);
+  const [buttons] = useState([0, 0]);
 
   useEffect(() => {
     async function fetchLatestOrders() {
