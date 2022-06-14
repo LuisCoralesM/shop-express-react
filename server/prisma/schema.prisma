@@ -31,7 +31,7 @@ model Order {
     province    String
     country     String
     phone       String
-    products    Product[]
+    products    Int[]
     total       Float
     payment     String
     created_at  DateTime  @default(now())
@@ -45,8 +45,6 @@ model Product {
     unit_price  Float
     image       String
     sale        Int
-    order       Order?     @relation(fields: [order_id], references: [id])
-    order_id    Int?
     category    Category[] //shirt, pants, jogger, skirt
     created_at  DateTime   @default(now())
     updated_at  DateTime   @updatedAt

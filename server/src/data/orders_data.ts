@@ -5,8 +5,38 @@ const prisma = new PrismaClient();
 export async function findAllOrders() {
   try {
     return await prisma.order.findMany({
-      include: {
-        products: true,
+      orderBy: {
+        created_at: "desc",
+      },
+    });
+  } catch (e) {
+    return [];
+  }
+}
+
+export async function findAllOrdersByCountry() {
+  try {
+    return await prisma.order.groupBy({
+      by: ["country"],
+      _sum: {
+        total: true,
+      },
+    });
+  } catch (e) {
+    return [];
+  }
+}
+
+export async function findAllOrdersByProduct(id: number) {
+  try {
+    return await prisma.order.findMany({
+      where: {
+        products: {
+          has: id,
+        },
+      },
+      orderBy: {
+        created_at: "desc",
       },
     });
   } catch (e) {
@@ -19,9 +49,6 @@ export async function findUniqueOrder(id: number) {
     return await prisma.order.findUnique({
       where: {
         id: id,
-      },
-      include: {
-        products: true,
       },
     });
   } catch (error) {
@@ -51,9 +78,7 @@ export async function createOrder(
         phone,
         total,
         payment,
-        products: {
-          connect: products.map((id: number) => ({ id: id })),
-        },
+        products: products.map((id: number) => id),
       },
     });
   } catch (error) {
