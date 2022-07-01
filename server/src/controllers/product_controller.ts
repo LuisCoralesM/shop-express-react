@@ -1,6 +1,6 @@
 import { Product } from "@prisma/client";
 import { Request, Response } from "express";
-import { findAllOrdersByProduct } from "../data/orders_data";
+import { findAllOrdersByProduct, findAllOrders } from "../data/orders_data";
 import {
   createProduct,
   findAllProducts,
@@ -11,6 +11,7 @@ import {
 import {
   compareTwoProducts,
   getProductSales,
+  getProductsSalesByDate,
 } from "../services/products_stats";
 
 /** To GET products route */
@@ -111,6 +112,22 @@ export async function getProductSalesStats(req: Request, res: Response) {
       data: getProductSales(
         await findAllOrdersByProduct(Number(req.params.id)),
         await findUniqueProduct(Number(req.params.id))
+      ),
+    });
+  } catch (e) {
+    console.log(e);
+    return res.sendStatus(500);
+  }
+}
+
+export async function getMostSoldProductsStats(req: Request, res: Response) {
+  try {
+    return res.status(200).json({
+      data: getProductsSalesByDate(
+        await findAllOrders(),
+        await findAllProducts(),
+        new Date(req.body.startDate),
+        new Date(req.body.endDate)
       ),
     });
   } catch (e) {
