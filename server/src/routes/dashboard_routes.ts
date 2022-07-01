@@ -35,6 +35,7 @@ router.get("/stats/orders/total", verifyAdmin, order_controller.getSalesByTotals
 router.post("/stats/orders/", verifyAdmin, order_controller.getSalesByMonth);
 
 // PRODUCTS STATS
+router.post("/stats/products/dates", verifyAdmin, products_controller.getMostSoldProductsStats);
 router.post("/stats/products/compare", verifyAdmin, products_controller.getTwoProductsStats);
 router.get("/stats/products/:id", verifyAdmin, products_controller.getProductSalesStats);
 
