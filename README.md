@@ -6,15 +6,11 @@ A completely functional clothing store for users to create their account and ord
 
 Heroku deployment [HERE!](https://clothingstore-lc.herokuapp.com/)
 
+Made in React, Express and PostgreSQL
+
 ## Core project
 
-For the admin account, you could check the following stuff:
-
-- a
-- b
-- c
-
-## Features
+Explanation of the whole project
 
 - a
 - b
