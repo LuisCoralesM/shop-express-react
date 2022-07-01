@@ -4,7 +4,15 @@
 
 A completely functional clothing store for users to create their account and order some cool shirts!
 
-Heroku deployment [HERE](https://clothingstore-lc.herokuapp.com/)!
+Heroku deployment [HERE!](https://clothingstore-lc.herokuapp.com/)
+
+## Core project
+
+For the admin account, you could check the following stuff:
+
+- a
+- b
+- c
 
 ## Features
 
@@ -12,9 +20,20 @@ Heroku deployment [HERE](https://clothingstore-lc.herokuapp.com/)!
 - b
 - c
 
-## Core project
+## Development
 
-For the admin account, you could check the following stuff:
-- a
-- b
-- c
+Commands to start the backend side:
+
+```
+$ cd server
+$ npm install
+$ npm run dev
+```
+
+And to run the frontend using another terminal:
+
+```
+$ cd ../client
+$ npm install
+$ npm start
+```
