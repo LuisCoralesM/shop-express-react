@@ -26,6 +26,8 @@ EMAIL: 1@1.com
 
 PASSWORD: 11111111
 
+---
+
 ## Development
 
 Commands to start the backend side:
