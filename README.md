@@ -10,7 +10,7 @@ Made in React, Express and PostgreSQL
 
 ## Core project
 
-The project consists in two sides, the backend API and the frontend. The backend is made as a MVC structure, which can be accessed by its endpoints so the data provided by the client can be stored, modified or deleted in the database. The frontend makes requests to this backend API.
+The project consists of two apps, the backend API and the frontend. The backend is made as a MVC structure, which can be accessed by its endpoints so the data provided by the client can be stored, modified or deleted in the database. The frontend makes requests to this backend API.
 
 The basic user (which can be created by signing up) can do the following:
 
