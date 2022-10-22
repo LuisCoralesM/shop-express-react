@@ -1,6 +1,6 @@
 [![CI](https://github.com/LuisCoralesM/shop-express-react/actions/workflows/node.js.yml/badge.svg)](https://github.com/LuisCoralesM/shop-express-react/actions/workflows/node.js.yml)
 
-# Clothing Store
+# Trendy Cloth - A Clothing Store
 
 A completely functional clothing store for users to create their account and order some cool shirts!
 
