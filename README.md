@@ -20,14 +20,6 @@ The basic user (which can be created by signing up) can do the following:
 
 The admin user can do all the previous stuff and check the core, which consists in the stats of sales by product and orders filtering them by dates, countries and many more. Also, the admin could add new products, check orders, modify existing users and manage the whole project.
 
-Use the following credentials
-
-EMAIL: 1@1.com
-
-PASSWORD: 11111111
-
----
-
 ## Development
 
 Commands to start the backend side:
