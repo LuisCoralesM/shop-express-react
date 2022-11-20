@@ -20,7 +20,7 @@ const config = {
   authRequired: false,
   auth0Logout: true,
   secret: "a long, randomly-generated string stored in env",
-  baseURL: "http://localhost:5000",
+  baseURL: "https://clothingstore-lc.herokuapp.com/",
   clientID: "01dFn9jKI0ACu6uhMKZ4faWJxNcZ1Vq7",
   issuerBaseURL: "https://dev-0ztpokj4mg0zjicf.us.auth0.com",
 };
