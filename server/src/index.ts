@@ -4,6 +4,7 @@ import cors from "cors";
 import router from "./routes";
 import cookieParser from "cookie-parser";
 import { join } from "path";
+import { auth } from "express-openid-connect";
 
 const prisma = new PrismaClient();
 
@@ -14,6 +15,23 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
+
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  secret: "a long, randomly-generated string stored in env",
+  baseURL: "http://localhost:5000",
+  clientID: "01dFn9jKI0ACu6uhMKZ4faWJxNcZ1Vq7",
+  issuerBaseURL: "https://dev-0ztpokj4mg0zjicf.us.auth0.com",
+};
+
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+app.use(auth(config));
+
+// req.isAuthenticated is provided from the auth router
+app.get("/", (req, res) => {
+  res.send(req.oidc.isAuthenticated() ? "Logged in" : "Logged out");
+});
 
 // Serve static files from the React frontend app
 app.use(express.static(join(__dirname, "/../../client/build")));
