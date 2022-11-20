@@ -115,11 +115,19 @@ export default function App() {
             <Route path="/admin/users/actions" element={<ActionMenu />} />
 
             <Route path="/admin/stats/orders/country" element={<Countries />} />
-            <Route path="/admin/stats/orders/compare" element={<CompareSales />} />
-            <Route path="/admin/stats/products/compare" element={<CompareProducts />} />
-            <Route path="/admin/stats/products" element={<ProductStats />}/>
-            <Route path="/admin/stats/products/dates" element={<MostSoldProducts />} />
-
+            <Route
+              path="/admin/stats/orders/compare"
+              element={<CompareSales />}
+            />
+            <Route
+              path="/admin/stats/products/compare"
+              element={<CompareProducts />}
+            />
+            <Route path="/admin/stats/products" element={<ProductStats />} />
+            <Route
+              path="/admin/stats/products/dates"
+              element={<MostSoldProducts />}
+            />
 
             <Route path="/admin/products" element={<Products />} />
 
@@ -131,10 +139,12 @@ export default function App() {
             <Route path="/admin/orders/all" element={<AllOrders />} />
           </>
         ) : (
-          <Route path="*" element={<Error />} />
+          <></>
+          // <Route path="*" element={<Error />} />
         )}
 
-        <Route path="*" element={<Error />} />
+        <></>
+        {/* <Route path="*" element={<Error />} /> */}
       </Routes>
     </Router>
   ) : (
