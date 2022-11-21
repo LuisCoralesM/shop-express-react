@@ -19,7 +19,7 @@ app.use(cookieParser());
 const config = {
   authRequired: false,
   auth0Logout: true,
-  baseURL: "http://localhost:" + port,
+  baseURL: "http://127.0.0.1:3000",
   clientID: process.env.CLIENTID,
   issuerBaseURL: process.env.ISSUERBASEURL,
   secret: process.env.SECRET,

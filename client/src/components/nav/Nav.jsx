@@ -149,7 +149,7 @@ export default function Nav({ props }) {
                       <Menu.Item>
                         <a
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                          href="http://localhost:5000/logout"
+                          href="http://127.0.0.1:5000/logout"
                         >
                           Logout Auth0
                         </a>

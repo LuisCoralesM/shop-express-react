@@ -40,7 +40,7 @@ export default function Login({ props }) {
       <div className="w-full flex justify-center">
         {!hasLogged ? (
           <>
-            <a href="http://localhost:5000/login">
+            <a href="http://127.0.0.1:5000/login">
               <button
                 className="flex-shrink-0 border-transparent border-2 bg-gray-900 text-orange-500 hover:text-orange-700 text-sm p-2 rounded"
                 type="submit"
