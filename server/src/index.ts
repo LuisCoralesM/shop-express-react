@@ -19,9 +19,7 @@ app.use(cookieParser());
 const config = {
   authRequired: false,
   auth0Logout: true,
-  baseURL: process.env.PROD
-    ? "https://clothingstore-lc.herokuapp.com"
-    : "http://127.0.0.1:" + port,
+  baseURL: "https://clothingstore-lc.herokuapp.com",
   clientID: process.env.CLIENTID,
   issuerBaseURL: process.env.ISSUERBASEURL,
   secret: process.env.SECRET,
