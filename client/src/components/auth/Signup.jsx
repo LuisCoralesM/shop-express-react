@@ -26,7 +26,7 @@ export default function Signup({ props }) {
     try {
       e.preventDefault();
 
-      const response = await fetchApi("/api/auth/signup/", "POST", {
+      const response = await fetchApi("/auth/signup/", "POST", {
         first_name: user.firstName,
         last_name: user.lastName,
         email: user.email,

@@ -22,10 +22,7 @@ export default function Nav({ props }) {
         { name: "Cart", href: "/cart", current: false },
         { name: "Shop", href: "/", current: true },
       ]
-    : [
-        { name: "Shop", href: "/", current: true },
-        { name: "Cart", href: "/cart", current: false },
-      ];
+    : [{ name: "Shop", href: "/", current: true }];
 
   const location = useLocation();
 
@@ -107,6 +104,19 @@ export default function Nav({ props }) {
                     leaveTo="transform opacity-0 scale-95"
                   >
                     <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      {/* <Menu.Item>
+                        {({ active }) => (
+                          <Link
+                            to="/dashboard/users/myuser"
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-gray-700"
+                            )}
+                          >
+                            My account
+                          </Link>
+                        )}
+                      </Menu.Item> */}
                       <Menu.Item>
                         {({ active }) => (
                           <Link
@@ -145,14 +155,6 @@ export default function Nav({ props }) {
                             Logout
                           </Link>
                         )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        <a
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                          href="http://localhost:5000/logout"
-                        >
-                          Logout Auth0
-                        </a>
                       </Menu.Item>
                     </Menu.Items>
                   </Transition>

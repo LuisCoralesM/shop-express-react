@@ -26,7 +26,7 @@ router.get("/orders/latest/:id", verifyAdmin, order_controller.getLatestOrdersSa
 router.get("/orders/country/", verifyAdmin, order_controller.getOrdersByCountry); //ADMIN
 router.get("/orders/:id", verifyAdmin, order_controller.getOneOrder); //ADMIN
 router.get("/orders/", verifyAdmin, order_controller.getOrders); //ADMIN
-router.post("/orders/",  order_controller.postOrder); //Everyone
+router.post("/orders/", verifyAdmin, order_controller.postOrder); //ADMIN
 router.put("/orders/:id", verifyAdmin, order_controller.putOrder); //ADMIN
 
 // ORDERS/SALES STATS
