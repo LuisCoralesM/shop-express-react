@@ -1,8 +1,8 @@
 {
   "scripts": {
     "start": "npm run dev",
-    "frontend": "cd ../client && npm install --package-lock-only --no-audit --no-fund --no-optional && npm start",
-    "api": "cd server && npm install --no-audit --no-fund --no-optional && npm run mig && npm start",
+    "frontend": "cd ../client && npm install --no-audit --no-fund && npm start",
+    "api": "cd server && npm install --no-audit --no-fund && npm run mig && npm start",
     "dev": "npm run api && npm run frontend",
     "heroku-postbuild": "cd client && npm install && npm run build"
   }
