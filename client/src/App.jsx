@@ -61,6 +61,22 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    async function checkAuth() {
+      const response = await fetchApi("/api/auth0/checkAuth0");
+      console.log(response);
+      if (response.data.isAuthenticated) {
+        localStorage.setItem(
+          "isLogged",
+          JSON.stringify(response.data.isAuthenticated)
+        );
+        localStorage.setItem(
+          "isAdmin",
+          JSON.stringify(response.data.isAdmin === "ADMIN" ? true : false)
+        );
+        setIsLogged(checkLogin());
+      }
+    }
+    checkAuth();
     setIsLogged(checkLogin());
   }, []);
 
@@ -139,12 +155,10 @@ export default function App() {
             <Route path="/admin/orders/all" element={<AllOrders />} />
           </>
         ) : (
-          <></>
-          // <Route path="*" element={<Error />} />
+          <Route path="*" element={<Error />} />
         )}
 
-        <></>
-        {/* <Route path="*" element={<Error />} /> */}
+        <Route path="*" element={<Error />} />
       </Routes>
     </Router>
   ) : (
