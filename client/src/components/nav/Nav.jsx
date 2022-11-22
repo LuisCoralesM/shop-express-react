@@ -149,7 +149,7 @@ export default function Nav({ props }) {
                       <Menu.Item>
                         <a
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                          href={process.env.APIURL + "/logout"}
+                          href="https://clothingstore-lc.herokuapp.com/logout"
                         >
                           Logout Auth0
                         </a>

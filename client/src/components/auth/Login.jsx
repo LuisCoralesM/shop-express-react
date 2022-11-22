@@ -40,7 +40,7 @@ export default function Login({ props }) {
       <div className="w-full flex justify-center">
         {!hasLogged ? (
           <>
-            <a href={process.env.APIURL + "/login"}>
+            <a href="https://clothingstore-lc.herokuapp.com/login">
               <button
                 className="flex-shrink-0 border-transparent border-2 bg-gray-900 text-orange-500 hover:text-orange-700 text-sm p-2 rounded"
                 type="submit"

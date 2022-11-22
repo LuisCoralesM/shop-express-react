@@ -63,7 +63,6 @@ export default function App() {
   useEffect(() => {
     async function checkAuth() {
       const response = await fetchApi("/api/auth0/checkAuth0");
-      console.log(response);
       if (response.data.isAuthenticated) {
         localStorage.setItem(
           "isLogged",
