@@ -62,7 +62,7 @@ export default function CreateProduct(props) {
           <label className="text-lg">Unit Price</label>
           <input
             className="w-full bg-gray-700 border-transparent rounded"
-            type="text"
+            type="number"
             name="unit_price"
             placeholder="Price..."
             onChange={setState(setNewProduct)}
@@ -83,7 +83,7 @@ export default function CreateProduct(props) {
           <label className="text-lg">Sale</label>
           <input
             className="w-full bg-gray-700 border-transparent rounded"
-            type="text"
+            type="number"
             name="sale"
             placeholder="Sale..."
             onChange={setState(setNewProduct)}
