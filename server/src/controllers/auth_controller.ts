@@ -79,9 +79,13 @@ function makeid(length: number) {
 
 export async function checkAuth0(req: Request, res: Response) {
   try {
-    const authUser = req.oidc.user;
+    const authUser = req.oidc.user || {
+      email: req.body.email,
+      username: req.body.username,
+      exists: req.body.email,
+    };
 
-    if (authUser) {
+    if (authUser.exists) {
       const user = await prisma.user.findUnique({
         where: {
           email: authUser.email,
@@ -91,7 +95,7 @@ export async function checkAuth0(req: Request, res: Response) {
       if (user === null) {
         const newUser = await prisma.user.create({
           data: {
-            first_name: authUser.given_name || "",
+            first_name: authUser.given_name || authUser.username || "",  
             last_name: authUser.family_name || "",
             email: authUser.email,
             password: makeid(30),
@@ -113,6 +117,9 @@ export async function checkAuth0(req: Request, res: Response) {
         .json({
           isAuthenticated: true,
           isAdmin: req.body.isAdmin,
+          email: req.oidc.user?.email,
+          username: req.oidc.user?.given_name,
+          token: req.headers.authorization,
         });
     }
     return res.status(200).json({ isAuthenticated: false, isAdmin: false });
