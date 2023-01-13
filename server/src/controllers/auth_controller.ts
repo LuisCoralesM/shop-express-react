@@ -2,6 +2,7 @@ import argon2 from "argon2";
 import { PrismaClient, User, Role } from "@prisma/client";
 import jwt, { SignOptions } from "jsonwebtoken";
 import { Request, Response } from "express";
+var axios = require("axios").default;
 
 const prisma = new PrismaClient();
 
@@ -66,22 +67,22 @@ export async function signup(req: Request, res: Response) {
   }
 }
 
-function makeid(length: number) {
-  let result = "";
-  const characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#$Y$%&/()={+}[]";
-  const charactersLength = characters.length;
-  for (var i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
+async function makeid() {
+  return await argon2.hash("12e82bdfhjab", {
+    type: argon2.argon2id,
+  });
 }
 
 export async function checkAuth0(req: Request, res: Response) {
   try {
-    const authUser = req.oidc.user;
+    const authUser = req.oidc.user || {
+      email: req.body.email,
+      username: req.body.username,
+      exists: req.body.email,
+    };
+    console.log("A");
 
-    if (authUser) {
+    if (authUser.exists) {
       const user = await prisma.user.findUnique({
         where: {
           email: authUser.email,
@@ -91,10 +92,10 @@ export async function checkAuth0(req: Request, res: Response) {
       if (user === null) {
         const newUser = await prisma.user.create({
           data: {
-            first_name: authUser.given_name || "",
+            first_name: authUser.given_name || authUser.username || "",
             last_name: authUser.family_name || "",
             email: authUser.email,
-            password: makeid(30),
+            password: await makeid(),
             role: authUser.email === "1@1.com" ? Role.ADMIN : Role.USER,
           },
         });
@@ -113,9 +114,15 @@ export async function checkAuth0(req: Request, res: Response) {
         .json({
           isAuthenticated: true,
           isAdmin: req.body.isAdmin,
+          email: authUser.email,
+          username: authUser.username || authUser.given_name,
+          token: req.headers.authorization,
         });
     }
-    return res.status(200).json({ isAuthenticated: false, isAdmin: false });
+    return res.status(200).json({
+      isAuthenticated: false,
+      isAdmin: false,
+    });
   } catch (e) {
     console.log(e);
     return res.sendStatus(500);

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { checkLogin } from "../../utils/checkLogin";
 import { setState } from "../../utils/hooks";
 import { fetchApi } from "../../utils/response";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Login({ props }) {
   const [user, setUser] = useState({
@@ -9,6 +10,7 @@ export default function Login({ props }) {
     password: undefined,
   });
   const [hasLogged, setHasLogged] = useState(false);
+  const { loginWithRedirect } = useAuth0();
 
   useEffect(() => {
     setHasLogged(checkLogin());
@@ -40,14 +42,15 @@ export default function Login({ props }) {
       <div className="w-full flex justify-center">
         {!hasLogged ? (
           <>
-            <a href="https://clothingstore-lc.herokuapp.com/login">
-              <button
-                className="flex-shrink-0 border-transparent border-2 bg-gray-900 text-orange-500 hover:text-orange-700 text-sm p-2 rounded"
-                type="submit"
-              >
-                Login from Auth0
-              </button>
-            </a>
+            {/* <a href="http://localhost:3000/login"> */}
+            <button
+              className="flex-shrink-0 border-transparent border-2 bg-gray-900 text-orange-500 hover:text-orange-700 text-sm p-2 rounded"
+              type="submit"
+              onClick={() => loginWithRedirect()}
+            >
+              Login from Auth0
+            </button>
+            {/* </a> */}
             <form
               className="w-4/5 bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4"
               onSubmit={loginUser}
