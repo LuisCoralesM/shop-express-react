@@ -38,12 +38,15 @@ import CompareSales from "./components/stats/CompareSales";
 import CompareProducts from "./components/stats/CompareProducts";
 import ProductStats from "./components/stats/ProductStats";
 import MostSoldProducts from "./components/stats/MostSoldProducts";
+import { useAuth0 } from "@auth0/auth0-react";
+import TechIssuePosts from "./views/TechIssuePosts"
 
 export default function App() {
   const [status, setStatus] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingA, setIsLoading] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const { user } = useAuth0();
 
   useEffect(() => {
     async function getStatus() {
@@ -62,7 +65,10 @@ export default function App() {
 
   useEffect(() => {
     async function checkAuth() {
-      const response = await fetchApi("/api/auth0/checkAuth0");
+      const response = await fetchApi("/api/auth0/checkAuth0", "POST", {
+        username: user.name,
+        email: user.email,
+      });
       if (response.data.isAuthenticated) {
         localStorage.setItem(
           "isLogged",
@@ -72,18 +78,31 @@ export default function App() {
           "isAdmin",
           JSON.stringify(response.data.isAdmin === "ADMIN" ? true : false)
         );
+        const r = await fetch("https://localhost:7017/api/auth/auth0-login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userID: 0,
+            email: response.data.email,
+            username: response.data.username,
+            password: "",
+          }),
+        });
+        const data = await r.text();
+        localStorage.setItem("techIssueToken", JSON.stringify(data));
+
         setIsLogged(checkLogin());
       }
     }
     checkAuth();
     setIsLogged(checkLogin());
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     setIsAdmin(JSON.parse(localStorage.getItem("isAdmin")) ? true : false);
   }, []);
 
-  if (isLoading) return <p>Loading..</p>;
+  if (isLoadingA) return <p>Loading..</p>;
 
   return status ? (
     <Router>
@@ -112,6 +131,7 @@ export default function App() {
                 />
               }
             />
+            <Route path="/techissue" element={<TechIssuePosts />} />
 
             <Route path="/cart" element={<Cart />} />
           </>

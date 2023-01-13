@@ -16,7 +16,7 @@ export async function findUserById(id: number) {
         role: true,
         created_at: true,
         deleted_at: true,
-      }
+      },
     });
   } catch (error) {
     return undefined;
