@@ -8,6 +8,15 @@ export async function findUserById(id: number) {
       where: {
         id,
       },
+      select: {
+        id: true,
+        first_name: true,
+        last_name: true,
+        email: true,
+        role: true,
+        created_at: true,
+        deleted_at: true,
+      },
     });
   } catch (error) {
     return undefined;
