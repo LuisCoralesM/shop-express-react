@@ -41,7 +41,12 @@ export async function decryptData(req: Request, res: Response) {
   try {
     const decryptedText = await decryptSymmetric();
 
-    return res.status(200).json({ decryptedText });
+    return res
+      .status(200)
+      .json({
+        decrypted: decryptedText?.decrypted,
+        encrypted: decryptedText?.encrypted,
+      });
   } catch (e) {
     console.log(e);
     return res.sendStatus(500);
@@ -61,8 +66,10 @@ async function decryptSymmetric() {
 
     const plaintext = decryptResponse.plaintext?.toString();
 
+    console.log(a.data);
+
     console.log(`Plaintext: ${plaintext}`);
-    return plaintext;
+    return { decrypted: plaintext, encrypted: a.data };
   } catch (e) {
     console.log(e);
   }

@@ -4,6 +4,7 @@ import { fetchApi } from "../utils/response";
 const TechIssuePosts = () => {
   const [post, setPost] = useState();
   const [decryptedText, setDecryptedText] = useState();
+  const [encryptedText, setEncryptedText] = useState();
 
   useEffect(() => {
     async function callTechIssue() {
@@ -20,7 +21,8 @@ const TechIssuePosts = () => {
     async function decrypt() {
       const a = await fetchApi("/api/kms/decrypt", "POST");
 
-      setDecryptedText(a.data.decryptedText);
+      setDecryptedText(a.data.decrypted);
+      setEncryptedText(a.data.encrypted);
     }
 
     callTechIssue();
@@ -37,6 +39,11 @@ const TechIssuePosts = () => {
       <br />
       <h1 className="text-xl">Decrypted Text</h1>
       <p>{decryptedText}</p>
+      <br />
+      <h1 className="text-xl">Encrypted Text</h1>
+      <div className="break-all">
+        <p>{encryptedText}</p>
+      </div>
     </div>
   );
 };
