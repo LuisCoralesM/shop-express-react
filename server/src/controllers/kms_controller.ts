@@ -1,67 +1,66 @@
+import { KeyManagementServiceClient } from "@google-cloud/kms";
 import { Request, Response } from "express";
-import {
-  KmsKeyringNode,
-  buildClient,
-  CommitmentPolicy,
-} from "@aws-crypto/client-node";
-import AWS from "aws-sdk";
+import { Storage } from "@google-cloud/storage";
 
-AWS.config.update({
-  region: "us-east-1",
-  apiVersion: "latest",
-  credentials: {
-    accessKeyId: "AKIAS2IYA4SRBNETZ2C6",
-    secretAccessKey: "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",
-  },
-});
+const projectId = "inlaid-vehicle-3748022";
+const locationId = "global";
+const keyRingId = "secure_development";
+const keyId = "llave_proyecto";
 
-const { encrypt, decrypt } = buildClient(
-  CommitmentPolicy.REQUIRE_ENCRYPT_REQUIRE_DECRYPT
-);
-
-const generatorKeyId =
-  "arn:aws:kms:us-east-1:193860789410:alias/trendycloth_encryptDecrypt";
-const keyIds = [
-  "arn:aws:kms:us-east-1:193860789410:key/47712e0d-7be2-4e96-b4e0-fd4ef6dba5d7",
-];
-
-const keyring = new KmsKeyringNode({ generatorKeyId, keyIds });
-
-const context = {
-  stage: "demo",
-  purpose: "simple demonstration app",
-  origin: "us-east-1",
-};
-
-export async function encryptData(req: Request, res: Response) {
+async function authenticateImplicitWithAdc() {
   try {
-    const { result } = await encrypt(keyring, req.body.data, {
-      encryptionContext: context,
+    const storage = new Storage({
+      projectId,
     });
-    console.log(result.toString());
+    const [buckets] = await storage.getBuckets();
+    console.log("Buckets:");
 
-    const { plaintext } = await decrypt(keyring, result);
+    for (const bucket of buckets) {
+      console.log(`- ${bucket.name}`);
+    }
 
-    return res.status(200).json({ result, text: plaintext.toString() });
+    console.log("Listed all storage buckets.");
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+authenticateImplicitWithAdc();
+
+// Instantiates a client
+const client = new KeyManagementServiceClient();
+
+// Build the key name
+const keyName = client.cryptoKeyPath(projectId, locationId, keyRingId, keyId);
+
+export async function decryptData(req: Request, res: Response) {
+  try {
+    const decryptedText = await decryptSymmetric();
+
+    return res.status(200).json({ decryptedText });
   } catch (e) {
     console.log(e);
     return res.sendStatus(500);
   }
 }
 
-export async function decryptData(req: Request, res: Response) {
+async function decryptSymmetric() {
   try {
-    const { plaintext, messageHeader } = await decrypt(keyring, req.body.data);
-    const { encryptionContext } = messageHeader;
+    const a = await fetch(
+      "https://localhost:7017/api/SecureDevelopment/get-encrypted-data"
+    );
+    const b = await a.json();
 
-    Object.entries(context).forEach(([key, value]) => {
-      if (encryptionContext[key] !== value)
-        throw new Error("Encryption Context does not match expected values");
+    const [decryptResponse] = await client.decrypt({
+      name: keyName,
+      ciphertext: Buffer.from(b),
     });
 
-    return res.status(200).json({ plaintext, messageHeader });
+    const plaintext = decryptResponse.plaintext?.toString();
+
+    console.log(`Plaintext: ${plaintext}`);
+    return plaintext;
   } catch (e) {
     console.log(e);
-    return res.sendStatus(500);
   }
 }
