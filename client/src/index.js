@@ -9,7 +9,7 @@ root.render(
   <Auth0Provider
     domain={process.env.REACT_APP_DOMAIN}
     clientId={process.env.REACT_APP_CLIENTID}
-    redirectUri={window.location.origin}
+    redirectUri={"http://localhost:3000"}
   >
     <App />
   </Auth0Provider>

@@ -1,31 +1,35 @@
 import { KeyManagementServiceClient } from "@google-cloud/kms";
 import { Request, Response } from "express";
 import { Storage } from "@google-cloud/storage";
+import axios from "axios";
 
-const projectId = "inlaid-vehicle-3748022";
+const projectId = "inlaid-vehicle-374802";
 const locationId = "global";
 const keyRingId = "secure_development";
 const keyId = "llave_proyecto";
 
-async function authenticateImplicitWithAdc() {
-  try {
-    const storage = new Storage({
-      projectId,
-    });
-    const [buckets] = await storage.getBuckets();
-    console.log("Buckets:");
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
-    for (const bucket of buckets) {
-      console.log(`- ${bucket.name}`);
-    }
+// async function authenticateImplicitWithAdc() {
+//   try {
+//     const storage = new Storage({
+//       projectId,
+//     });
+//     const [buckets] = await storage.getBuckets();
+//     console.log("Buckets:");
 
-    console.log("Listed all storage buckets.");
-  } catch (e) {
-    console.log(e);
-  }
-}
+//     for (const bucket of buckets) {
+//       console.log(`- ${bucket.name}`);
+//     }
 
-authenticateImplicitWithAdc();
+//     console.log("Listed all storage buckets.");
+//   } catch (e) {
+//     console.log(e);
+//   }
+// }
+
+// authenticateImplicitWithAdc();
 
 // Instantiates a client
 const client = new KeyManagementServiceClient();
@@ -46,14 +50,13 @@ export async function decryptData(req: Request, res: Response) {
 
 async function decryptSymmetric() {
   try {
-    const a = await fetch(
-      "https://localhost:7017/api/SecureDevelopment/get-encrypted-data"
+    const a = await axios.get(
+      "http://localhost:5017/api/SecureDevelopment/get-encrypted-data"
     );
-    const b = await a.json();
 
     const [decryptResponse] = await client.decrypt({
       name: keyName,
-      ciphertext: Buffer.from(b),
+      ciphertext: a.data,
     });
 
     const plaintext = decryptResponse.plaintext?.toString();

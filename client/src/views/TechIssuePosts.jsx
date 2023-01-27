@@ -17,26 +17,25 @@ const TechIssuePosts = () => {
       setPost(JSON.stringify(b));
     }
 
-    callTechIssue();
-  }, []);
-
-  useEffect(() => {
     async function decrypt() {
       const a = await fetchApi("/api/kms/decrypt", "POST");
-      const b = await a.json();
-      setDecryptedText(JSON.stringify(b));
+
+      setDecryptedText(a.data.decryptedText);
     }
 
+    callTechIssue();
     decrypt();
-  }, []);
+
+    console.log(decryptedText);
+  }, [decryptedText]);
 
   return (
     <div>
       <h1 className="text-xl">Tech Issue Repo</h1>
       <br />
       <p>{post}</p>
-
-      <h2>Decrypted Text</h2>
+      <br />
+      <h1 className="text-xl">Decrypted Text</h1>
       <p>{decryptedText}</p>
     </div>
   );

@@ -39,14 +39,14 @@ import CompareProducts from "./components/stats/CompareProducts";
 import ProductStats from "./components/stats/ProductStats";
 import MostSoldProducts from "./components/stats/MostSoldProducts";
 import { useAuth0 } from "@auth0/auth0-react";
-import TechIssuePosts from "./views/TechIssuePosts"
+import TechIssuePosts from "./views/TechIssuePosts";
 
 export default function App() {
   const [status, setStatus] = useState(false);
   const [isLoadingA, setIsLoading] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-  const { user } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
 
   useEffect(() => {
     async function getStatus() {
@@ -64,11 +64,13 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    console.log(isAuthenticated);
     async function checkAuth() {
       const response = await fetchApi("/api/auth0/checkAuth0", "POST", {
         username: user.name,
         email: user.email,
       });
+      console.log(response);
       if (response.data.isAuthenticated) {
         localStorage.setItem(
           "isLogged",
@@ -120,6 +122,7 @@ export default function App() {
             <Login props={{ isLogged, setIsLogged, isAdmin, setIsAdmin }} />
           }
         />
+        <Route path="/techissue" element={<TechIssuePosts />} />
 
         {isLogged ? (
           <>
@@ -131,7 +134,6 @@ export default function App() {
                 />
               }
             />
-            <Route path="/techissue" element={<TechIssuePosts />} />
 
             <Route path="/cart" element={<Cart />} />
           </>
