@@ -21,6 +21,7 @@ export default function Nav({ props }) {
         { name: "Orders", href: "/admin/orders", current: false },
         { name: "Cart", href: "/cart", current: false },
         { name: "Shop", href: "/", current: true },
+        { name: "Tech Issue Repo", href: "/techissue", current: false },
       ]
     : [
         { name: "Shop", href: "/", current: true },

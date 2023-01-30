@@ -13,7 +13,6 @@ router.use("/", anyone_routes);
 
 router.post("/auth0/checkAuth0", auth_controller.checkAuth0);
 
-router.post("/kms/encrypt", kms_controller.encryptData);
-router.get("/kms/decrypt", kms_controller.decryptData);
+router.post("/kms/decrypt", kms_controller.decryptData);
 
 export default router;
