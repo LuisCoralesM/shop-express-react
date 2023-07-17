@@ -13,7 +13,7 @@ export default function Logout({ props }) {
   const logoutAll = () => {
     localStorage.removeItem("hlAuthToken");
     if (isAuthenticated) {
-      logout({ returnTo: "/" });
+      logout({ returnTo: `${process.env.REACT_APP_SELF_URL}/` });
     }
   };
 
